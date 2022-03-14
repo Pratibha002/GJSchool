@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
@@ -39,5 +41,10 @@ public class SchoolConfig {
 	public JdbcTemplate jdbcTemplate() {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(datasource());
 		return jdbcTemplate;
+	}
+	
+	@Bean
+	public PasswordEncoder encoder() {
+		return NoOpPasswordEncoder.getInstance();
 	}
 }
