@@ -1,5 +1,7 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="j" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1" isELIgnored="false"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,9 +9,16 @@
 <title>Student Enrollment</title>
 </head>
 <body>
-<center> 
-<h2> Student Enrollment</h2>
-</center>
+	<center>
+		<h2>Student Enrollment</h2>
+
+		<form:form action="logout" method="POST">
+			<input type="submit" value="Logout">
+		</form:form>
+	</center>
+
+	</center>
+
 
 </body>
 </html>

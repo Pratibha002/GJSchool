@@ -33,7 +33,7 @@ public class SchoolConfig {
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		dataSource.setUsername("root");
 		dataSource.setPassword("root");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/GJSchool");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/gjschool");
 		return dataSource;
 	}
 
