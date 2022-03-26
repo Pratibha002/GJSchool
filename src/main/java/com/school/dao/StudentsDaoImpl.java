@@ -14,7 +14,7 @@ public class StudentsDaoImpl implements StudentsDao {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-
+	
 	@Override
 	public void addStudents(StudentsDTO dto) {
 	System.out.println("inside DB method");
@@ -31,6 +31,12 @@ public class StudentsDaoImpl implements StudentsDao {
 	public StudentsDTO getStudent(int id) {
 		String sql = "select * from students where id=?";
 		StudentsDTO student = jdbcTemplate.queryForObject(sql,new StudentsMapper(),id);
+		return student;
+	}
+	
+	public StudentsDTO getStudentbyRollNo(String rollNo) {
+		String sql = "select * from students where roll_no=?";
+		StudentsDTO student = jdbcTemplate.queryForObject(sql,new StudentsMapper(),rollNo);
 		return student;
 	}
 

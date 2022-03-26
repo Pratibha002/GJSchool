@@ -3,12 +3,6 @@ package com.school.dto;
 public class StudentsDTO {
 
 	public int id;
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public String name;
 	public String father_name;
 	public String mother_name;
@@ -18,6 +12,14 @@ public class StudentsDTO {
 	public String session;
 	public String address;
 	public String mobile;
+	
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
