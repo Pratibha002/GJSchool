@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.school.dto.FeesAmountDto;
 import com.school.dto.StudentsDTO;
+import com.school.mapper.RemFeesMapper;
 import com.school.mapper.StudentsMapper;
 
 @Repository
@@ -46,10 +48,28 @@ public class StudentsDaoImpl implements StudentsDao {
 	public List<StudentsDTO> listStudents() {
 		String sql = "select * from students";
 		List<StudentsDTO> studentList = jdbcTemplate.query(sql, new StudentsMapper());
-		displayStudent(studentList);
+//		displayStudent(studentList);
 		return studentList;
 	}
 
+	public List<FeesAmountDto> remainingFees() {
+		String sql ="SELECT roll_no,SUM(amount) FROM fees GROUP BY roll_no";
+	List<FeesAmountDto> feesDto = 	jdbcTemplate.query(sql, new RemFeesMapper());
+	return feesDto;
+	}
+	
+	public int totalRemainingFees() {
+		String sql ="SELECT SUM(amount) FROM fees";
+	return jdbcTemplate.queryForObject(sql, Integer.class);
+	}
+	
+	
+	
+	public int totalFees() {
+		String sql  = "SELECT SUM(fees) FROM students";
+		return  jdbcTemplate.queryForObject(sql, Integer.class);
+	}
+	
 	public void displayStudent(List<StudentsDTO> student) {
 		for (StudentsDTO stu : student) {
 			System.out.println(stu);

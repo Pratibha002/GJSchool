@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 //This is going to create filter chain
 
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity
 public class SecurityConfigFilter extends WebSecurityConfigurerAdapter {
 
 	@Autowired

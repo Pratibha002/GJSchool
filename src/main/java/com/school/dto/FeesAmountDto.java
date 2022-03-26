@@ -4,11 +4,7 @@ import java.sql.Date;
 
 public class FeesAmountDto {
 
-	@Override
-	public String toString() {
-		return "FeesAmountDto [roll_no=" + roll_no + ", amount=" + amount + ", date=" + date + "]";
-	}
-
+	
 	public String roll_no;
 	public String amount;
 	public String date;
@@ -37,6 +33,10 @@ public class FeesAmountDto {
 		this.amount = amount;
 	}
 
+	@Override
+	public String toString() {
+		return "FeesAmountDto [roll_no=" + roll_no + ", amount=" + amount + ", date=" + date + "]";
+	}
 	
 	 
 	

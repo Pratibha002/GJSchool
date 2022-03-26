@@ -1,7 +1,11 @@
 package com.school.controller;
 
+import java.net.http.HttpRequest;
+import java.nio.file.spi.FileSystemProvider;
 import java.sql.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.HttpServerErrorException;
 
 import com.school.dao.FeesDao;
 import com.school.dao.StudentsDaoImpl;
@@ -47,27 +52,45 @@ public class StudentController {
 	}
 	
 	@RequestMapping("/feesSummary")
-	public String feesSummary(@RequestParam("roll_No") String rollNo, Model model) {
-		List<FeesAmountDto> feesList = feesDao.feesSummary(rollNo);
-		StudentsDTO dto = studentsDao.getStudentbyRollNo(rollNo);
-		model.addAttribute("dto", dto);
-		model.addAttribute("feesList", feesList);
-		return "submitFees";
+	public String feesSummary(Model model, @RequestParam("rollNo") String rollNo) {
+			List<FeesAmountDto> feesDto = feesDao.feesSummary(rollNo);
+			StudentsDTO stuDto = studentsDao.getStudentbyRollNo(rollNo);
+			model.addAttribute("feesDto", feesDto);
+			model.addAttribute("stuDto",stuDto);
+			return "feesSummary";
+	}
+	
+	@RequestMapping("/search")
+	public String search(@RequestParam("name") String name) {
+		if(name!=null) {
+			StudentsDTO stuDto = studentsDao.getStudentbyRollNo(name);
+			System.out.println(stuDto.getName());
+		}
+		return "studentsList";
 	}
 	
 	@RequestMapping("/submitFeesProcessing")
 	public String submitFeesProcessing(Model model, FeesAmountDto dto,@RequestParam String roll_No,@RequestParam String amount,@RequestParam String date) {
 		
 		feesDao.amountToDB(roll_No, amount, date);
-		return "submitFees";
+		return "redirect:/submitFees";
 	}
 
 	@RequestMapping("/studentsList")
 	public String studentsList(Model model) {
 		List<StudentsDTO> studentsList = studentsDao.listStudents();
+		List<FeesAmountDto> remFeesList = studentsDao.remainingFees();
+		int totalFees =  studentsDao.totalFees();
+		int totalRemFees = studentsDao.totalRemainingFees();
+		System.out.println("total fees"+totalFees);
 		model.addAttribute("studentsList", studentsList);
+		model.addAttribute("remFeesList",remFeesList);
+		model.addAttribute("totalFees", totalFees);
+		model.addAttribute("totalRemFees", totalRemFees);
 		return "studentsList";
 	}
+	
+	
 	@RequestMapping("/addStudents")
 	public String addStudents(Model model,StudentsDTO dto) {
 		model.addAttribute("student", dto);

@@ -25,40 +25,7 @@
 		</form>
 
 		<br>
-		<h2>Fees Summary of Student</h2>
-
-		<form action="feesSummary" method="get">
-
-			<label>Select Student : </label> <select name="roll_No">
-				<j:forEach var="stu" items="${studentsList}">
-					<option value="${stu.roll_no}">${stu.name}+ ${stu.classes}
-					</option>
-				</j:forEach>
-			</select><br> <input type="submit" value="Summary">
-		</form>
-
-		<table border="">
-			<tr>
-				<td>S.No</td>
-				<td>Name </td>
-				<td> Class</td>
-				<td>Roll-No</td>
-				<td>Amount</td>
-				<td>Date</td>
-			</tr>
-
-			<j:forEach var="fees" items="${feesList}">
-				<tr>
-					<td></td>
-					<td>${dto.name} </td>
-					<td> ${dto.classes}</td>
-					<td>${fees.roll_no}</td>
-					<td>${fees.amount}</td>
-					<td>${fees.date}</td>
-				</tr>
-			</j:forEach>
-		</table>
-
+		
 
 	</center>
 </body>
