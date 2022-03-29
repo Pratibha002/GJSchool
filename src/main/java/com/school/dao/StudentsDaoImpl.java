@@ -1,9 +1,14 @@
 package com.school.dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
+
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.school.dto.FeesAmountDto;
@@ -42,7 +47,33 @@ public class StudentsDaoImpl implements StudentsDao {
 		return student;
 	}
 
-
+	public List<StudentsDTO> searchStudentbyRollNo(String rollNo) {
+		String sql = "select * from students where roll_no Like ?";
+		List<StudentsDTO> studentList = jdbcTemplate.query(sql,new StudentsMapper(),new String[] { "%" + rollNo + "%" });
+		return studentList;
+	}
+	
+	public List<StudentsDTO> searchStudentbyName(String name) {
+		String sql = "select * from students where name Like ?";
+		List<StudentsDTO> studentList = jdbcTemplate.query(sql,new StudentsMapper(),new String[] { "%" + name + "%" });
+		return studentList;
+	}
+	
+	public List<StudentsDTO> searchStudentbyClass(String classes) {
+		String sql = "select * from students where classes=?";
+		List<StudentsDTO> studentList = jdbcTemplate.query(sql,new StudentsMapper(),classes);
+		return studentList;
+	}
+	
+	public List<String> listOfclasses() {
+		String sql = "select distinct classes from students";
+		List<String> classes = jdbcTemplate.query(sql,new RowMapper<String>() {
+            public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return rs.getString(1);
+            }
+        });
+		return classes; 
+	} 
 
 	@Override
 	public List<StudentsDTO> listStudents() {

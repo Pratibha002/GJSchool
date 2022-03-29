@@ -3,6 +3,7 @@ package com.school.controller;
 import java.net.http.HttpRequest;
 import java.nio.file.spi.FileSystemProvider;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -60,12 +61,44 @@ public class StudentController {
 			return "feesSummary";
 	}
 	
-	@RequestMapping("/search")
-	public String search(@RequestParam("name") String name) {
-		if(name!=null) {
-			StudentsDTO stuDto = studentsDao.getStudentbyRollNo(name);
-			System.out.println(stuDto.getName());
-		}
+	
+	
+	@RequestMapping("/searchByRollNo")
+	public String searchByRollNo(@RequestParam("rollNo") String rollNo, Model model) {
+		List<StudentsDTO> studentsList = studentsDao.searchStudentbyRollNo(rollNo);
+		model.addAttribute("studentsList", studentsList);
+		List<FeesAmountDto> remFeesList = studentsDao.remainingFees();
+		int totalFees =  studentsDao.totalFees();
+		int totalRemFees = studentsDao.totalRemainingFees();
+		model.addAttribute("remFeesList",remFeesList);
+		model.addAttribute("totalFees", totalFees);
+		model.addAttribute("totalRemFees", totalRemFees);
+		return "studentsList";
+	}
+	
+	@RequestMapping("/searchByClass")
+	public String searchByClass(@RequestParam("classes") String className, Model model) {
+		List<StudentsDTO> studentsList = studentsDao.searchStudentbyClass(className);
+		List<FeesAmountDto> remFeesList = studentsDao.remainingFees();
+		int totalFees =  studentsDao.totalFees();
+		int totalRemFees = studentsDao.totalRemainingFees();
+		model.addAttribute("studentsList", studentsList);
+		model.addAttribute("remFeesList",remFeesList);
+		model.addAttribute("totalFees", totalFees);
+		model.addAttribute("totalRemFees", totalRemFees);
+		return "studentsList";
+	}
+	
+	@RequestMapping("/searchByName")
+	public String searchByName(@RequestParam("name") String name, Model model) {
+		List<StudentsDTO> studentsList = studentsDao.searchStudentbyName(name);
+		model.addAttribute("studentsList", studentsList);
+		List<FeesAmountDto> remFeesList = studentsDao.remainingFees();
+		int totalFees =  studentsDao.totalFees();
+		int totalRemFees = studentsDao.totalRemainingFees();
+		model.addAttribute("remFeesList",remFeesList);
+		model.addAttribute("totalFees", totalFees);
+		model.addAttribute("totalRemFees", totalRemFees);
 		return "studentsList";
 	}
 	
@@ -75,14 +108,17 @@ public class StudentController {
 		feesDao.amountToDB(roll_No, amount, date);
 		return "redirect:/submitFees";
 	}
+	
+
 
 	@RequestMapping("/studentsList")
 	public String studentsList(Model model) {
+		List<String> classes = studentsDao.listOfclasses();
 		List<StudentsDTO> studentsList = studentsDao.listStudents();
 		List<FeesAmountDto> remFeesList = studentsDao.remainingFees();
 		int totalFees =  studentsDao.totalFees();
 		int totalRemFees = studentsDao.totalRemainingFees();
-		System.out.println("total fees"+totalFees);
+		model.addAttribute("classes", classes);
 		model.addAttribute("studentsList", studentsList);
 		model.addAttribute("remFeesList",remFeesList);
 		model.addAttribute("totalFees", totalFees);

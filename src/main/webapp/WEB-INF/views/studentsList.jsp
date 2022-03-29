@@ -10,10 +10,32 @@
 <body>
 	<center>
 		<h1>Data Coming soon</h1>
-		<form action="search">
+		<form action="searchByRollNo">
+			<label>Roll No : </label> <input type="text" name="rollNo"><br>
+			<input type="submit" value="submit">
+		</form>
+		<span> </span>
+		<form action="searchByName">
 			<label>Name : </label> <input type="text" name="name"><br>
 			<input type="submit" value="submit">
 		</form>
+		<span> </span>
+		<form action="searchByClass" method="get">
+			<select name="classes">
+				<j:forEach var="classe" items="${classes}">
+					<option value="${classe}">${classe}</option>
+				</j:forEach>
+				<input type="submit" value="submit">
+			</select>
+		</form>
+
+
+		<br>
+		<hr>
+
+
+		</form>
+		<span> </span>
 		<!-- Model attritube: students -->
 		<!-- Iterating using JSTL -->
 		<!--Internally gettterMethod() is getting called : stu.id  -->
@@ -54,21 +76,21 @@
 						onclick="if (!(confirm('Are you sure you want to Delete'))) return false">
 							Delete</a></td>
 					<td><a href="feesSummary?rollNo=${stu.roll_no}"">Details</a></td>
-					<td>
-					<j:forEach var="fees" items="${remFeesList}">
-						<j:if test="${stu.roll_no==fees.roll_no}">${fees.amount }</j:if> 
-				</j:forEach>
-					</td>
+					<td><j:forEach var="fees" items="${remFeesList}">
+							<j:if test="${stu.roll_no==fees.roll_no}">${stu.fees-fees.amount }</j:if>
+						</j:forEach></td>
 				</tr>
 			</j:forEach>
 		</table>
-		<br> 
-		
-	<p>Total Fees : ${totalFees} </p><br>
-	<p>Total Remaining Fees :${totalRemFees}  </p><br>
-	
+		<br>
+
+		<p>Total Fees : ${totalFees}</p>
+		<br>
+		<p>Total Remaining Fees :${totalFees-totalRemFees}</p>
+		<br>
+
 	</center>
-    
+
 </body>
 </html>
 
