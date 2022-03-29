@@ -15,7 +15,22 @@
 			<form:hidden path="id" />
 
 			<label>Name : </label> <form:input path="name" /> <Br>
-			<label> Class :</label> <form:input path="classes"/> <br>
+			<label> Class :</label>
+			<form:select path="classes"> 
+			<form:option value="I"> I </form:option>
+			<form:option value="II"> II </form:option>
+			<form:option value="III"> III </form:option>
+			<form:option value="IV"> IV </form:option>
+			<form:option value="V"> V </form:option>
+			<form:option value="VI"> VI </form:option>
+			<form:option value="VII"> VII </form:option>
+			<form:option value="VIII"> VIII </form:option>
+			<form:option value="IX"> IX </form:option>
+			<form:option value="X"> X </form:option>
+			<form:option value="XI"> XI </form:option>
+			<form:option value="XII"> XII </form:option>
+			</form:select>
+			 <br>
 			<label> Father-Name :</label> <form:input path="father_name"/> <br>
 			<label> Mother-Name :</label> <form:input path="mother_name"/> <br>
 			<label> Roll-No :</label> <form:input path="roll_no"/> <br>
