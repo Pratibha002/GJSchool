@@ -7,6 +7,7 @@
 <title>Administrator Login</title>
 </head>
 <body>
+<jsp:include page="../../verMenu.jsp"></jsp:include>
 <center> 
 <h2> Administrator Login</h2>
 </center>

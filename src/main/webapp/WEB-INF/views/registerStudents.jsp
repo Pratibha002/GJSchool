@@ -8,8 +8,9 @@
 <title>Add Students Here</title>
 </head>
 <body>
+<jsp:include page="../../verMenu.jsp"></jsp:include>
+	<div> 
 
-	<center>
 		<form:form action="addStudentsToDb" modelAttribute="student" method="get">
 
 			<form:hidden path="id" />
@@ -42,6 +43,7 @@
 			<input type="submit" value="Add Students">
 		</form:form>
 		<a href="studentsList"> Students List</a>
-	</center>
+	
+	</div>
 </body>
 </html>

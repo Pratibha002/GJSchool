@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<jsp:include page="../../verMenu.jsp"></jsp:include>
 	<center>
 
 		<form action="submitFeesProcessing" method="get">

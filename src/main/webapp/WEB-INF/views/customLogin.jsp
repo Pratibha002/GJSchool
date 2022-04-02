@@ -9,8 +9,7 @@
 <title>Please Login Here</title>
 </head>
 <body>
-	<br>
-	<br>
+<jsp:include page="../../verMenu.jsp"></jsp:include>
 	<center>
 		<j:if test="${param.error!=null }">
 	<i> Invalid ID or Password</i>

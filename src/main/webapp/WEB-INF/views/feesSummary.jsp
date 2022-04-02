@@ -10,6 +10,7 @@
 <title>Student Fees Summary</title>
 </head>
 <body>
+<jsp:include page="../../verMenu.jsp"></jsp:include>
 	<center>
 		
 

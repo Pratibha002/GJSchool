@@ -9,6 +9,7 @@
 <title>Student Enrollment</title>
 </head>
 <body>
+<jsp:include page="../../verMenu.jsp"></jsp:include>
 	<center>
 		<h2>Student Enrollment</h2>
 
