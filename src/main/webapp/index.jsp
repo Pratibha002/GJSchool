@@ -12,6 +12,7 @@
 </head>
 
 <body>
+
 <jsp:include page="verMenu.jsp"></jsp:include>
 
 <h2>Welcome To Gyan Jyoti School !</h2>
