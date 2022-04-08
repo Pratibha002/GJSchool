@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.HttpServerErrorException;
 
+import com.school.dao.AdminDao;
 import com.school.dao.FeesDao;
 import com.school.dao.StudentsDaoImpl;
+import com.school.dto.AdmissionDto;
 import com.school.dto.FeesAmountDto;
 import com.school.dto.StudentsDTO;import com.school.mapper.FeesMapper;
 
@@ -32,6 +34,27 @@ public class StudentController {
 	@Autowired
 	private FeesDao feesDao;
 
+	@Autowired
+	public AdminDao adminDao;
+	
+	
+	@RequestMapping("/admissionForm")
+	public String admissionForm(Model model, AdmissionDto dto ) {
+		List<String> classesList = adminDao.listClasses();
+		List<String> listCategory = adminDao.listCategory();
+		List<String> session = adminDao.listSession();
+		model.addAttribute("session", session);
+		model.addAttribute("classesList", classesList);
+		model.addAttribute("listCategory", listCategory);
+		model.addAttribute("admissionDto", dto);
+		return "admissionForm";
+	}
+	
+	
+	
+	
+	
+	
 	
 	@RequestMapping(value ="/stusignup", method = RequestMethod.GET)
 	public String stuSignup() {
@@ -164,6 +187,20 @@ public class StudentController {
 		return "redirect:/addStudents";
 	}
 	
+	
+	@RequestMapping("/saveAdmissison")
+	public String saveAdmissison(AdmissionDto dto, Model model) {
+		System.out.println("inside save students");
+
+		System.out.println(dto);
+		//		if (dto.getId() == 0) {
+//			studentsDao.addStudents(dto);
+//		} else {
+//			studentsDao.updateStudent(dto);
+//		}
+//		model.addAttribute("student", dto);
+		return "redirect:/addStudents";
+	}
 	@ResponseBody
 	@RequestMapping("/stulist")
 	public String stuList() {

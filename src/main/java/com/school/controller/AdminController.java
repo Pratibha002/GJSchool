@@ -18,6 +18,9 @@ public class AdminController {
 	@Autowired
 	public AdminDao adminDao;
 	
+	
+	
+	
 	@RequestMapping("/classes")
 	public String classes(Model model) {
 		List<String> classes = adminDao.listClasses();

@@ -16,6 +16,8 @@
 <jsp:include page="verMenu.jsp"></jsp:include>
 
 <h2>Welcome To Gyan Jyoti School !</h2>
+<br> 
+<a href="admissionForm">Admission Form</a>
 
 </body>
 </html>
