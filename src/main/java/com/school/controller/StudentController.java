@@ -5,6 +5,7 @@ import java.nio.file.spi.FileSystemProvider;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -43,6 +44,7 @@ public class StudentController {
 		List<String> classesList = adminDao.listClasses();
 		List<String> listCategory = adminDao.listCategory();
 		List<String> session = adminDao.listSession();
+		
 		model.addAttribute("session", session);
 		model.addAttribute("classesList", classesList);
 		model.addAttribute("listCategory", listCategory);
@@ -190,11 +192,9 @@ public class StudentController {
 	
 	@RequestMapping("/saveAdmissison")
 	public String saveAdmissison(AdmissionDto dto, Model model) {
-		System.out.println("inside save students");
-
 		System.out.println(dto);
 		//		if (dto.getId() == 0) {
-//			studentsDao.addStudents(dto);
+			studentsDao.saveStudents(dto);
 //		} else {
 //			studentsDao.updateStudent(dto);
 //		}

@@ -6,7 +6,44 @@ public class AdmissionDto {
 
 	public int id;
 	public String name;
+	public String fName;
+	public String fOccupation;
+	public String getFees() {
+		return fees;
+	}
+	public void setFees(String fees) {
+		this.fees = fees;
+	}
+
+
+
+	public String mName;
+	public String mOccupation;
+	public String contact;
+	public String altContact;
+	public Date dob;
+	public String samagraId;
+	public String aadhar;
+	public String bankName;
+	public String accNo;
+	public String ifsc;
+	public String address;
+	public String lastClassAttended;
+	public String city;
+	public String state;
+	public String zip;
+	public String branch;
+	public String stuClass;
+	public String fees;
+	public String gender;
+	public String category;
+	public Date admissionDate;
+	public String scholarNumber;
+	public String lastSchoolStudied;
+	public String birthPlace;
+	public String religion;
 	public String session;
+
 	public String getSession() {
 		return session;
 	}
@@ -181,43 +218,17 @@ public class AdmissionDto {
 	public void setReligion(String religion) {
 		this.religion = religion;
 	}
-	public String fName;
-	public String fOccupation;
-	public String mName;
-	public String mOccupation;
-	public String contact;
-	public String altContact;
-	public Date dob;
-	public String samagraId;
-	
-	public String aadhar;
-	public String bankName;
-	public String accNo;
-	public String ifsc;
-	public String address;
-	public String lastClassAttended;
-	public String city;
-	public String state;
-	public String zip;
-	public String branch;
-	public String stuClass;
-	public String gender;
-	public String category;
-	public Date admissionDate;
-	public String scholarNumber;
-	public String lastSchoolStudied;
-	public String birthPlace;
-	public String religion;
 	@Override
 	public String toString() {
-		return "AdmissionDto [id=" + id + ", name=" + name + ", session=" + session + ", fName=" + fName
-				+ ", fOccupation=" + fOccupation + ", mName=" + mName + ", mOccupation=" + mOccupation + ", contact="
-				+ contact + ", altContact=" + altContact + ", dob=" + dob + ", samagraId=" + samagraId + ", aadhar="
-				+ aadhar + ", bankName=" + bankName + ", accNo=" + accNo + ", ifsc=" + ifsc + ", address=" + address
-				+ ", lastClassAttended=" + lastClassAttended + ", city=" + city + ", state=" + state + ", zip=" + zip
-				+ ", branch=" + branch + ", stuClass=" + stuClass + ", gender=" + gender + ", category=" + category
+		return "AdmissionDto [id=" + id + ", name=" + name + ", fName=" + fName + ", fOccupation=" + fOccupation
+				+ ", mName=" + mName + ", mOccupation=" + mOccupation + ", contact=" + contact + ", altContact="
+				+ altContact + ", dob=" + dob + ", samagraId=" + samagraId + ", aadhar=" + aadhar + ", bankName="
+				+ bankName + ", accNo=" + accNo + ", ifsc=" + ifsc + ", address=" + address + ", lastClassAttended="
+				+ lastClassAttended + ", city=" + city + ", state=" + state + ", zip=" + zip + ", branch=" + branch
+				+ ", stuClass=" + stuClass + ", fees=" + fees + ", gender=" + gender + ", category=" + category
 				+ ", admissionDate=" + admissionDate + ", scholarNumber=" + scholarNumber + ", lastSchoolStudied="
-				+ lastSchoolStudied + ", birthPlace=" + birthPlace + ", religion=" + religion + "]";
+				+ lastSchoolStudied + ", birthPlace=" + birthPlace + ", religion=" + religion + ", session=" + session
+				+ "]";
 	}
 	
 	

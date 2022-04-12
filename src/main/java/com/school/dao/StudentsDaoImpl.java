@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.school.dto.AdmissionDto;
 import com.school.dto.FeesAmountDto;
 import com.school.dto.StudentsDTO;
 import com.school.mapper.RemFeesMapper;
@@ -22,14 +23,21 @@ public class StudentsDaoImpl implements StudentsDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	@Override
-	public void addStudents(StudentsDTO dto) {
+	public int getPK() {
+		String sql = "select max(id) from students";
+		return jdbcTemplate.queryForObject(sql,Integer.class)  ;
+	}
+	
+	public void saveStudents(AdmissionDto dto) {
 	System.out.println("inside DB method");
-		String sql = "insert into students(name,father_name, mother_name, roll_no,classes, fees, session,address, mobile)values(?,?,?,?,?,?,?,?,?) ";
+		String sql = "insert into students values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
 
-		Object[] args = { dto.getName(), dto.getFather_name(), dto.getMother_name(), dto.getRoll_no(), dto.getClasses(),
-				dto.getFees(), dto.getSession(), dto.getAddress(), dto.getMobile() };
-
+		Object[] args = { getPK(), dto.getfName(), dto.getfName(), dto.getfOccupation(), dto.getmName(), dto.getmOccupation(), dto.getCategory(), 
+						  dto.getAltContact(), dto.getDob(), dto.getSamagraId(), dto.getAadhar(), dto.getBankName(), dto.getAccNo(), 
+						  dto.getIfsc(), dto.getAddress(), dto.getLastClassAttended(), dto.getCity(), dto.getState(), dto.getZip(), 
+						  dto.getBranch(), dto.getStuClass(), dto.getFees(), dto.getGender(), dto.getCategory(), dto.getAdmissionDate(),
+						  dto.getScholarNumber(), dto.getLastSchoolStudied(), dto.getBirthPlace(), dto.getReligion(), dto.getSamagraId()};
+				;
 		jdbcTemplate.update(sql, args);
 		System.out.println("inserted");
 	}
@@ -122,6 +130,12 @@ public class StudentsDaoImpl implements StudentsDao {
 		Object[] args = {dto.getName(), dto.getFather_name(), dto.getMother_name(),dto.getClasses(),dto.getFather_name(), dto.getSession(), dto.getAddress(),dto.getMobile(), dto.getRoll_no()};
 		int result= jdbcTemplate.update(sql, args);
 		System.out.println("Record updated");
+	}
+
+	@Override
+	public void addStudents(StudentsDTO dto) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	
