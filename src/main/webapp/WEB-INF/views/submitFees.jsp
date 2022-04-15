@@ -15,12 +15,12 @@
 		<form action="submitFeesProcessing" method="get">
 
 			<label>Select Student : </label> 
-			<select name="roll_No">
+			<select name="scholarNumber">
 				<j:forEach var="stu" items="${studentsList}">
-					<option value="${stu.roll_no}">${stu.name}+ ${stu.classes}</option>
+					<option value="${stu.scholarNumber}">${stu.name}</option>
 				</j:forEach>
 			</select><br> <label>Amount : </label> <input name="amount" /> <Br>
-			<label>Date : </label> <input name="date" placeholder="dd/mm/yyyy" />
+			<label>Date : </label> <input type="date" name="date" placeholder="dd/mm/yyyy" />
 			<Br> <input type="submit" value="submit">
 
 		</form>

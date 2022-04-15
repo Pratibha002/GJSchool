@@ -17,6 +17,9 @@
 
 			<label>Class : </label> <input type="text" name="className" placeholder="Enter Class in Roman Number" />
 			<Br>
+			<label>Fees : </label> <input type="text" name="feesAmount" placeholder="Enter Fees Amount For Class" />
+			<Br>
+
 			<input type="submit" value="Add Class">
 			 
 		</form:form>
@@ -27,14 +30,15 @@
 		<table border="">
 			<tr>
 				<td>Classes</td>
-				<Td> </Td>
+				<Td> Fees</Td>
+				<Td>Action </Td>
 			</tr>
 			
 			<j:forEach var="classes" items="${classes}">
 				<tr>
-				<td> </td>
-					<td>${classes}</td>
-					<td><a href="deleteclasses?classes=${classes}">Delete</a></td>
+					<td>${classes.classes}</td>
+					<td>${classes.fees}</td>
+					<td><a href="deleteclasses?classes=${classes.classes}">Delete</a></td>
 				</tr>
 			</j:forEach>
 			

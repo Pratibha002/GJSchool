@@ -2,13 +2,14 @@ package com.school.dao;
 
 import java.util.List;
 
+import com.school.dto.AdmissionDto;
 import com.school.dto.StudentsDTO;
 
 public interface StudentsDao{
 
 	public void addStudents(StudentsDTO dto); 
-	public List<StudentsDTO> listStudents();
+	public List<AdmissionDto> listStudents();
 	void deleteStudent(String rollNo);
 	void updateStudent(StudentsDTO dto);
-	StudentsDTO getStudent(int id);
+	AdmissionDto getStudent(int id);
 }

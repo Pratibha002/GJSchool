@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.school.dao.AdminDao;
+import com.school.dto.FeesClassesDto;
 
 @Controller
 public class AdminController {
@@ -23,16 +24,16 @@ public class AdminController {
 	
 	@RequestMapping("/classes")
 	public String classes(Model model) {
-		List<String> classes = adminDao.listClasses();
+		List<FeesClassesDto> classes = adminDao.listClasses();
 		model.addAttribute("classes", classes);
 		return "addClasses";
 	}
 	
 	@RequestMapping("/addClasses")
-	public String addClasses(@RequestParam("className") String className) {
-	List<String> classesList = 	adminDao.listClasses();
+	public String addClasses(@RequestParam("className") String className,@RequestParam("feesAmount") int feesAmount) {
+	List<FeesClassesDto> classesList = 	adminDao.listClasses();
 	if(!classesList.contains(className)) {
-		adminDao.addClasses(className);	
+		adminDao.addClassesAndFees(className,feesAmount);	
 	}
 		return "redirect:/classes";
 	}

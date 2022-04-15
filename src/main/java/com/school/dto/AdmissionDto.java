@@ -8,15 +8,6 @@ public class AdmissionDto {
 	public String name;
 	public String fName;
 	public String fOccupation;
-	public String getFees() {
-		return fees;
-	}
-	public void setFees(String fees) {
-		this.fees = fees;
-	}
-
-
-
 	public String mName;
 	public String mOccupation;
 	public String contact;
@@ -34,7 +25,7 @@ public class AdmissionDto {
 	public String zip;
 	public String branch;
 	public String stuClass;
-	public String fees;
+	public int fees;
 	public String gender;
 	public String category;
 	public Date admissionDate;
@@ -44,6 +35,14 @@ public class AdmissionDto {
 	public String religion;
 	public String session;
 
+	public int getFees() {
+		return fees;
+	}
+	public void setFees(int fees) {
+		this.fees = fees;
+	}
+
+	
 	public String getSession() {
 		return session;
 	}

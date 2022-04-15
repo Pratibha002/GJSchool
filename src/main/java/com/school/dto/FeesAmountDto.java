@@ -5,39 +5,29 @@ import java.sql.Date;
 public class FeesAmountDto {
 
 	
-	public String roll_no;
+	public String scholarNumber;
 	public String amount;
 	public String date;
-
-	public String getRoll_no() {
-		return roll_no;
+	public String getScholarNumber() {
+		return scholarNumber;
 	}
-
-	public void setRoll_no(String roll_no) {
-		this.roll_no = roll_no;
+	public void setScholarNumber(String scholarNumber) {
+		this.scholarNumber = scholarNumber;
 	}
-	
+	public String getAmount() {
+		return amount;
+	}
+	public void setAmount(String amount) {
+		this.amount = amount;
+	}
 	public String getDate() {
 		return date;
 	}
-
 	public void setDate(String date) {
 		this.date = date;
 	}
 
-	public String getAmount() {
-		return amount;
-	}
 
-	public void setAmount(String amount) {
-		this.amount = amount;
-	}
-
-	@Override
-	public String toString() {
-		return "FeesAmountDto [roll_no=" + roll_no + ", amount=" + amount + ", date=" + date + "]";
-	}
-	
 	 
 	
 }

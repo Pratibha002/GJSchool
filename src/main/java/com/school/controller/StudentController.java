@@ -24,6 +24,7 @@ import com.school.dao.FeesDao;
 import com.school.dao.StudentsDaoImpl;
 import com.school.dto.AdmissionDto;
 import com.school.dto.FeesAmountDto;
+import com.school.dto.FeesClassesDto;
 import com.school.dto.StudentsDTO;import com.school.mapper.FeesMapper;
 
 @Controller
@@ -41,7 +42,7 @@ public class StudentController {
 	
 	@RequestMapping("/admissionForm")
 	public String admissionForm(Model model, AdmissionDto dto ) {
-		List<String> classesList = adminDao.listClasses();
+		List<FeesClassesDto> classesList = adminDao.listClasses();
 		List<String> listCategory = adminDao.listCategory();
 		List<String> session = adminDao.listSession();
 		
@@ -72,25 +73,41 @@ public class StudentController {
 	
 	@RequestMapping("/submitFees")
 	public String submitFees(Model model) {
-		List<StudentsDTO> studentsList = studentsDao.listStudents();
+		List<AdmissionDto> studentsList = studentsDao.listStudents();
 		model.addAttribute("studentsList", studentsList);
 		return "submitFees";
 	}
 	
 	@RequestMapping("/feesSummary")
-	public String feesSummary(Model model, @RequestParam("rollNo") String rollNo) {
-			List<FeesAmountDto> feesDto = feesDao.feesSummary(rollNo);
-			StudentsDTO stuDto = studentsDao.getStudentbyRollNo(rollNo);
+	public String feesSummary(Model model, @RequestParam("rollNo") String scholarNumber) {
+			List<FeesAmountDto> feesDto = feesDao.feesSummary(scholarNumber);
+			AdmissionDto stuDto = studentsDao.getStudentbyscholarNumber(scholarNumber);
 			model.addAttribute("feesDto", feesDto);
 			model.addAttribute("stuDto",stuDto);
 			return "feesSummary";
 	}
 	
 	
+	@RequestMapping("/searchByBranch")
+	public String searchByBranch(@RequestParam("branch") String branch, Model model) {
+		System.out.println("branch name "+branch);
+		List<AdmissionDto> studentsList = studentsDao.searchStudentbyBranch(branch);
+		
+		List<FeesAmountDto> remFeesList = studentsDao.remainingFees();
+		int totalFees =  studentsDao.totalFees();
+		int totalRemFees = studentsDao.totalRemainingFees();
+		
+		model.addAttribute("studentsList", studentsList);
+		model.addAttribute("remFeesList",remFeesList);
+		model.addAttribute("totalFees", totalFees);
+		model.addAttribute("totalRemFees", totalRemFees);
+		return "studentsList";
+	}
+	
 	
 	@RequestMapping("/searchByRollNo")
 	public String searchByRollNo(@RequestParam("rollNo") String rollNo, Model model) {
-		List<StudentsDTO> studentsList = studentsDao.searchStudentbyRollNo(rollNo);
+		List<AdmissionDto> studentsList = studentsDao.searchStudentbyscholarNumber(rollNo);
 		model.addAttribute("studentsList", studentsList);
 		List<FeesAmountDto> remFeesList = studentsDao.remainingFees();
 		int totalFees =  studentsDao.totalFees();
@@ -103,7 +120,7 @@ public class StudentController {
 	
 	@RequestMapping("/searchByClass")
 	public String searchByClass(@RequestParam("classes") String className, Model model) {
-		List<StudentsDTO> studentsList = studentsDao.searchStudentbyClass(className);
+		List<AdmissionDto> studentsList = studentsDao.searchStudentbyClass(className);
 		List<FeesAmountDto> remFeesList = studentsDao.remainingFees();
 		int totalFees =  studentsDao.totalFees();
 		int totalRemFees = studentsDao.totalRemainingFees();
@@ -116,7 +133,7 @@ public class StudentController {
 	
 	@RequestMapping("/searchByName")
 	public String searchByName(@RequestParam("name") String name, Model model) {
-		List<StudentsDTO> studentsList = studentsDao.searchStudentbyName(name);
+		List<AdmissionDto> studentsList = studentsDao.searchStudentbyName(name);
 		model.addAttribute("studentsList", studentsList);
 		List<FeesAmountDto> remFeesList = studentsDao.remainingFees();
 		int totalFees =  studentsDao.totalFees();
@@ -128,9 +145,9 @@ public class StudentController {
 	}
 	
 	@RequestMapping("/submitFeesProcessing")
-	public String submitFeesProcessing(Model model, FeesAmountDto dto,@RequestParam String roll_No,@RequestParam String amount,@RequestParam String date) {
+	public String submitFeesProcessing(Model model, FeesAmountDto dto,@RequestParam String scholarNumber,@RequestParam String amount,@RequestParam Date date) {
 		
-		feesDao.amountToDB(roll_No, amount, date);
+		feesDao.amountToDB(scholarNumber, amount, date);
 		return "redirect:/submitFees";
 	}
 	
@@ -139,7 +156,7 @@ public class StudentController {
 	@RequestMapping("/studentsList")
 	public String studentsList(Model model) {
 		List<String> classes = studentsDao.listOfclasses();
-		List<StudentsDTO> studentsList = studentsDao.listStudents();
+		List<AdmissionDto> studentsList = studentsDao.listStudents();
 		List<FeesAmountDto> remFeesList = studentsDao.remainingFees();
 		int totalFees =  studentsDao.totalFees();
 		int totalRemFees = studentsDao.totalRemainingFees();
@@ -160,11 +177,18 @@ public class StudentController {
 	
 	@RequestMapping("/updateStudents")
 	public String updateStudent(Model model, @RequestParam("userId") int id) {
-		StudentsDTO student = studentsDao.getStudent(id);
+		AdmissionDto student = studentsDao.getStudent(id);
 		System.out.println("fetched student : " + student);
-		model.addAttribute("student", student);
 
-		return "registerStudents";
+		List<FeesClassesDto> classesList = adminDao.listClasses();
+		List<String> listCategory = adminDao.listCategory();
+		List<String> session = adminDao.listSession();
+		
+		model.addAttribute("session", session);
+		model.addAttribute("classesList", classesList);
+		model.addAttribute("listCategory", listCategory);
+		model.addAttribute("admissionDto", student);
+		return "admissionForm";
 	}
 	
 	
@@ -193,13 +217,18 @@ public class StudentController {
 	@RequestMapping("/saveAdmissison")
 	public String saveAdmissison(AdmissionDto dto, Model model) {
 		System.out.println(dto);
-		//		if (dto.getId() == 0) {
-			studentsDao.saveStudents(dto);
-//		} else {
-//			studentsDao.updateStudent(dto);
-//		}
-//		model.addAttribute("student", dto);
-		return "redirect:/addStudents";
+		System.out.println("alternate contact"+ dto.getAltContact());
+		String stuClass = dto.getStuClass();
+		dto.setFees(studentsDao.getStudentFees(stuClass));
+		if (dto.getId() == 0) {
+			System.out.println("saved method called");
+		studentsDao.saveStudents(dto);
+		} else {
+			System.out.println("update method called");
+			studentsDao.updateStudent(dto);
+		}
+		model.addAttribute("student", dto);
+		return "redirect:/studentsList";
 	}
 	@ResponseBody
 	@RequestMapping("/stulist")

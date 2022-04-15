@@ -21,7 +21,7 @@
 				<td>S.No</td>
 				<td>Name</td>
 				<td>Class</td>
-				<td>Roll-No</td>
+				<td>Scholar Number</td>
 				<td>Amount</td>
 				<td>Date</td>
 			</tr>
@@ -30,8 +30,8 @@
 				<tr>
 					<td></td>
 					<td>${stuDto.name}</td>
-					<td>${stuDto.classes}</td>
-					<td>${fees.roll_no}</td>
+					<td>${stuDto.stuClass}</td>
+					<td>${fees.scholarNumber}</td>
 					<td>${fees.amount}</td>
 					<td>${fees.date}</td>
 				</tr>

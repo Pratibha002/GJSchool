@@ -10,23 +10,28 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.school.dto.FeesClassesDto;
+
 @Repository
 public class AdminDao {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	public void addClasses(String classes) {
-		String sql = "insert into classes (classes) values(?)";
-		jdbcTemplate.update(sql, classes);
+	public void addClassesAndFees(String classes,int feesAmount) {
+		String sql = "insert into classes (classes,fees) values(?,?)";
+		jdbcTemplate.update(sql, classes,feesAmount);
 		
 	}
 	
-	public List<String> listClasses() {
+	public List<FeesClassesDto> listClasses() {
 		String sql = "select * from classes";
-		List<String> classes = jdbcTemplate.query(sql,new RowMapper<String>() {
-            public String mapRow(ResultSet rs, int rowNum) throws SQLException {
-                return rs.getString(1);
+		List<FeesClassesDto> classes = jdbcTemplate.query(sql,new RowMapper<FeesClassesDto>() {
+            public FeesClassesDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+            	FeesClassesDto dto = new FeesClassesDto();
+            	dto.setClasses(rs.getString(1));
+            	dto.setFees(rs.getInt(2));
+            	return dto;
             }
         });
 	return classes;

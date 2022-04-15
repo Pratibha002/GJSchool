@@ -41,11 +41,12 @@
 					</form:select>
 				</div>
 			</td><td> 	<div class="form-group col-md-6">
-					<label for="form:inputState">Category</label> <form:select path="category" >
-						<j:forEach var="listCategory" items="${listCategory}">
+					<label for="form:inputState">Category</label> 
+					<form:select path="category" >
+    <j:forEach var="listCategory" items="${listCategory}">
 					<option value="${listCategory}">${listCategory}</option>
 					</j:forEach>
-					</form:select>
+			</form:select>
 				</div></td>
 <td> 			<div class="form-group col-md-6">
 					<label for="form:inputEmail4">Religion</label> <form:input type="text" path="religion" placeholder="Religion"/>
@@ -75,11 +76,12 @@
 					<label for="form:inputEmail4">Contact</label> <form:input type="text" path="contact" placeholder="Contact Number"/>
 				</div>
 			</td>
-			<td><div class="form-group col-md-6">
-					<label >Alternate Contact</label> <form:input type="text"  path="altContact" placeholder="Alternate Contact"/>
+<td><div class="form-group col-md-6">
+					<label for="form:inputEmail4">Alt-Contact</label> <form:input type="text" path="altContact" placeholder="Contact Number"/>
 				</div>
-			</td>
-			<td><div class="form-group col-md-6">
+			</td>	
+<td>
+<div class="form-group col-md-6">
 					<label >Date Of Birth</label> <form:input type="date"  path="dob"/>
 				</div>
 			</td>
@@ -105,7 +107,7 @@
 				<div class="form-group col-md-6">
 					<label for="form:inputState">Class</label> <form:select path="stuClass">
 					<j:forEach var="classesList" items="${classesList}">
-					<option value="${classesList}">${classesList}</option>
+					<option value="${classesList.classes}">${classesList.classes}</option>
 					</j:forEach>
 					</form:select>
 				</div>
@@ -166,7 +168,7 @@
 				<div class="form-group col-md-6">
 					<label for="form:inputState">Last class Attended</label> <form:select path="lastClassAttended">
 					<j:forEach var="classesList" items="${classesList}">
-					<option value="${classesList}">${classesList}</option>
+					<option value="${classesList.classes}">${classesList.classes}</option>
 					</j:forEach>
 					</form:select>
 				</div>
@@ -204,7 +206,7 @@
 				</div>
 			</td>
 			<td><div class="form-group col-md-6">
-					<label >Photo</label> <input type="text" name="altContact" placeholder="Alternate Contact"/>
+					<label >Photo</label> <input type="text" name="photo" placeholder="Alternate Contact"/>
 				</div>
 			</td>
 			<td><div class="form-group col-md-6">

@@ -15,9 +15,23 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:include page="../../verMenu.jsp"></jsp:include>
+<!--<jsp:include page="../../verMenu.jsp"></jsp:include>-->
 <center> 
 <h1>Data Coming soon</h1>
+
+		<form action="searchByBranch">
+
+			<select name="branch">
+				<option value="Gyan Jyoti Public School">Gyan Jyoti Public
+					School</option>
+				<option value="Gyan Jyoti International School">Gyan Jyoti
+					International School</option>
+			</select>
+			<input type="submit" value="submit">
+		</form>
+
+
+
 		<form action="searchByRollNo">
 			<label>Roll No : </label> <input type="text" name="rollNo"><br>
 			<input type="submit" value="submit">
@@ -50,18 +64,20 @@
 		<table border="">
 			<tr>
 				<td>S.No</td>
-				<td>Name</td>
+				<td>Scholar No</td>
+				<td> Name </td>
 				<td>Father Name</td>
-				<td>Mobile Name</td>
-				<td>Roll No</td>
 				<td>Classes</td>
-				<td>Fees</td>
-				<td>Session</td>
-				<td>Address</td>
-				<td>Mobile</td>
-				<td>&nbsp</td>
-				<td>&nbsp</td>
-				<td>&nbsp</td>
+				<td>Contact</td>
+				<td> DOB </td>
+				<td> Category </td>
+				<td> Bank </td>
+				<td> Account No </td>
+				<td> IFSC </td>
+				<td> Aadhar </td>
+				<td> Samagra </td>
+				<td> Branch </td>
+				<td> Student Photo </td>
 				<td>Fees Details</td>
 				<td>Remainin Fees</td>
 			</tr>
@@ -69,24 +85,31 @@
 			<j:forEach var="stu" items="${studentsList}">
 				<tr>
 					<td>${stu.id}</td>
+					<td>${stu.scholarNumber}</td>
 					<td>${stu.name}</td>
-					<td>${stu.father_name}</td>
-					<td>${stu.mother_name}</td>
-					<td>${stu.roll_no}</td>
-					<td>${stu.classes}</td>
-					<td>${stu.fees}</td>
-					<td>${stu.session}</td>
-					<td>${stu.address}</td>
-					<td>${stu.mobile}</td>
-					<td><a href="addStudents"> Add</a></td>
+					<td>${stu.fName}</td>
+					<td>${stu.stuClass}</td>
+					<td>${stu.contact}</td>
+					<td>${stu.dob}</td>
+					<td>${stu.category}</td>
+					<td>${stu.bankName}</td>
+					<td>${stu.accNo} </td>
+					<td> ${stu.ifsc}</td>
+					<td>${stu.aadhar} </td>
+					<td>${stu.samagraId} </td>
+					<td>${stu.branch} </td>
+					<td>Photo</td>
+					<td> <a href="submitFees"> Submit Fees</a></td> 
+					<td><j:forEach var="fees" items="${remFeesList}">
+							<j:if test="${stu.scholarNumber==fees.scholarNumber}">${stu.fees-fees.amount }</j:if>
+						</j:forEach> </td>
+					<td><a href="admissionForm"> Add</a></td>
 					<td><a href="updateStudents?userId=${stu.id}"> update</a></td>
-					<td><a href="deleteStudent?rollNo=${stu.roll_no}"
+					<td><a href="deleteStudent?rollNo=${stu.scholarNumber}"
 						onclick="if (!(confirm('Are you sure you want to Delete'))) return false">
 							Delete</a></td>
-					<td><a href="feesSummary?rollNo=${stu.roll_no}"">Details</a></td>
-					<td><j:forEach var="fees" items="${remFeesList}">
-							<j:if test="${stu.roll_no==fees.roll_no}">${stu.fees-fees.amount }</j:if>
-						</j:forEach></td>
+					<td><a href="feesSummary?rollNo=${stu.scholarNumber}"">Details</a></td>
+					
 				</tr>
 			</j:forEach>
 		</table>

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.school.dto.AdmissionDto;
 import com.school.dto.FeesAmountDto;
 import com.school.dto.StudentsDTO;
 import com.school.mapper.FeesMapper;
@@ -21,9 +22,9 @@ public class FeesDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	public List<StudentsDTO> listofStudents() {
+	public List<AdmissionDto> listofStudents() {
 		String sql = "select * from students";
-		List<StudentsDTO> studentList = jdbcTemplate.query(sql, new StudentsMapper());
+		List<AdmissionDto> studentList = jdbcTemplate.query(sql, new StudentsMapper());
 
 		return studentList;
 	}
@@ -34,22 +35,22 @@ public class FeesDao {
 		}
 	}
 
-	public void amountToDB(String roll_No, String amount, String date) {
-		System.out.println(roll_No + amount + date);
+	public void amountToDB(String scholarNumber, String amount, Date date) {
+		System.out.println(scholarNumber + amount + date);
 
-		String sql = "insert into fees(roll_no,amount,date)values(?,?,?) ";
+		String sql = "insert into feestransaction(scholarNumber,amount,date)values(?,?,?) ";
 			
-		Object[] args = { roll_No, amount, date };
+		Object[] args = { scholarNumber, amount, date };
 
 		jdbcTemplate.update(sql, args);
 
 		System.out.println("Amount Saved");
 	}
 
-	public List<FeesAmountDto> feesSummary(String rollno) {
-		System.out.println(rollno);
-		String sql = "SELECT * FROM fees WHERE roll_no=?";
-		List<FeesAmountDto> feesList = jdbcTemplate.query(sql, new FeesMapper(),rollno);
+	public List<FeesAmountDto> feesSummary(String scholarNumber) {
+		System.out.println(scholarNumber);
+		String sql = "SELECT * FROM feestransaction WHERE scholarNumber=?";
+		List<FeesAmountDto> feesList = jdbcTemplate.query(sql, new FeesMapper(),scholarNumber);
 		
 		return feesList;
 
