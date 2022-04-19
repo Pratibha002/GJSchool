@@ -1,23 +1,29 @@
 package com.school.controller;
 
+import java.io.IOException;
 import java.net.http.HttpRequest;
 import java.nio.file.spi.FileSystemProvider;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.Base64Utils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.school.dao.AdminDao;
 import com.school.dao.FeesDao;
@@ -38,6 +44,14 @@ public class StudentController {
 
 	@Autowired
 	public AdminDao adminDao;
+
+	
+	@RequestMapping("/photoUpload")
+	public String photoUpload( ) {
+		return "photoUpload";
+	}
+	
+	
 	
 	
 	@RequestMapping("/admissionForm")
@@ -214,12 +228,29 @@ public class StudentController {
 	}
 	
 	
-	@RequestMapping("/saveAdmissison")
-	public String saveAdmissison(AdmissionDto dto, Model model) {
+	@RequestMapping(value="/saveAdmissison",method=RequestMethod.POST)
+	public String saveAdmissison(AdmissionDto dto, Model model, @RequestParam("aadharPic") MultipartFile  aadharPic,
+			@RequestParam("studentPic") MultipartFile  studentPic, @RequestParam("samagraPic") MultipartFile  samagraPic,
+			@RequestParam("castPic") MultipartFile  castPic, @RequestParam("tcPic") MultipartFile  tcPic,
+			@RequestParam("migrationPic") MultipartFile  migrationPic) throws IOException {
 		System.out.println(dto);
-		System.out.println("alternate contact"+ dto.getAltContact());
 		String stuClass = dto.getStuClass();
 		dto.setFees(studentsDao.getStudentFees(stuClass));
+		
+		dto.setAadharPhoto(Base64.getEncoder().encodeToString(aadharPic.getBytes()));
+		dto.setStudentPhoto(Base64.getEncoder().encodeToString(studentPic.getBytes()));
+		dto.setSamagraPhoto(Base64.getEncoder().encodeToString(samagraPic.getBytes()));
+		dto.setCastPhoto(Base64.getEncoder().encodeToString(castPic.getBytes()));
+		dto.setTcPhoto(Base64.getEncoder().encodeToString(tcPic.getBytes()));
+		dto.setMigrationPhoto(Base64.getEncoder().encodeToString(migrationPic.getBytes()));
+		
+		
+		
+		if (studentsDao.getListOfScholarNumbers().contains(dto.getScholarNumber())) {
+			model.addAttribute("msg", "Student Failed to Enrolled !! Scholar Number Already Exist");
+			return "admissionForm";
+		}
+		
 		if (dto.getId() == 0) {
 			System.out.println("saved method called");
 		studentsDao.saveStudents(dto);
@@ -227,8 +258,11 @@ public class StudentController {
 			System.out.println("update method called");
 			studentsDao.updateStudent(dto);
 		}
-		model.addAttribute("student", dto);
-		return "redirect:/studentsList";
+		
+		
+		model.addAttribute("msg", "Student Enrolled Successfully");
+		return "studentsList";
+		
 	}
 	@ResponseBody
 	@RequestMapping("/stulist")

@@ -15,10 +15,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-<!--<jsp:include page="../../verMenu.jsp"></jsp:include>-->
-<center> 
-<h1>Data Coming soon</h1>
 
+<center> 
+<br> 
+<hr>
+<font color="green"> </font><h1>${msg }</h1> </font>
+<hr> 
 		<form action="searchByBranch">
 
 			<select name="branch">
@@ -80,6 +82,7 @@
 				<td> Student Photo </td>
 				<td>Fees Details</td>
 				<td>Remainin Fees</td>
+				
 			</tr>
 
 			<j:forEach var="stu" items="${studentsList}">
@@ -98,7 +101,7 @@
 					<td>${stu.aadhar} </td>
 					<td>${stu.samagraId} </td>
 					<td>${stu.branch} </td>
-					<td>Photo</td>
+					<td><img id="aadharPreview" src="data:image/jpeg;base64,${stu.studentPhoto}" height="40" width="40"></td>
 					<td> <a href="submitFees"> Submit Fees</a></td> 
 					<td><j:forEach var="fees" items="${remFeesList}">
 							<j:if test="${stu.scholarNumber==fees.scholarNumber}">${stu.fees-fees.amount }</j:if>

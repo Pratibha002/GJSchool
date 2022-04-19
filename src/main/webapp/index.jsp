@@ -18,6 +18,12 @@
 <h2>Welcome To Gyan Jyoti School !</h2>
 <br> 
 <a href="admissionForm">Admission Form</a>
+<br> 
+<a href="studentsList">Students List</a>
+<br> 
+<a href="submitFees">Fees Submit</a>
+<br> 
+
 
 </body>
 </html>

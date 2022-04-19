@@ -43,6 +43,12 @@ public class StudentsMapper implements RowMapper<AdmissionDto>{
 		student.setBirthPlace(rs.getString(28));
 		student.setReligion(rs.getString(29));
 		student.setSession(rs.getString(30));
+		student.setAadharPhoto(rs.getString(31));
+		student.setStudentPhoto(rs.getString(32));
+		student.setSamagraPhoto(rs.getString(33));
+		student.setCastPhoto(rs.getString(34));
+		student.setTcPhoto(rs.getString(35));
+		student.setMigrationPhoto(rs.getString(36));
 		
 		return student;
 	} 

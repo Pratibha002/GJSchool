@@ -1,11 +1,12 @@
 package com.school.dao;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
-
-
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -30,6 +31,16 @@ public class StudentsDaoImpl implements StudentsDao {
 		return jdbcTemplate.queryForObject(sql,Integer.class)  ;
 	}
 	
+	public AdmissionDto getByScholarNumber(String scholarNumber) {
+		String sql = "select * from students where scholarNumber=? ";
+		return jdbcTemplate.queryForObject(sql,new StudentsMapper(),scholarNumber);  
+	}
+	
+	public List<String> getListOfScholarNumbers() {
+		String sql = "select scholarNumber from students ";
+		return jdbcTemplate.queryForList(sql,String.class);  
+	}
+	
 	public int getStudentFees(String stuClass) {
 		int fees = 0;
 		String sql = "select * from classes ";
@@ -52,15 +63,16 @@ public class StudentsDaoImpl implements StudentsDao {
 		return fees;
 	}
 	
-	public void saveStudents(AdmissionDto dto) {
+	public void saveStudents(AdmissionDto dto) throws IOException {
 	System.out.println("inside DB method");
-		String sql = "insert into students values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+		String sql = "insert into students values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
 
 		Object[] args = { getPK()+1, dto.getfName(), dto.getfName(), dto.getfOccupation(), dto.getmName(), dto.getmOccupation(), dto.getContact(), 
 						  dto.getAltContact(), dto.getDob(), dto.getSamagraId(), dto.getAadhar(), dto.getBankName(), dto.getAccNo(), 
 						  dto.getIfsc(), dto.getAddress(), dto.getLastClassAttended(), dto.getCity(), dto.getState(), dto.getZip(), 
 						  dto.getBranch(), dto.getStuClass(), dto.getFees(), dto.getGender(), dto.getCategory(), dto.getAdmissionDate(),
-						  dto.getScholarNumber(), dto.getLastSchoolStudied(), dto.getBirthPlace(), dto.getReligion(), dto.getSamagraId()};
+						  dto.getScholarNumber(), dto.getLastSchoolStudied(), dto.getBirthPlace(), dto.getReligion(), dto.getSamagraId(),
+						  dto.getAadharPhoto(),dto.getStudentPhoto(),dto.getSamagraPhoto(), dto.getCastPhoto(), dto.getTcPhoto(), dto.getMigrationPhoto()};
 				;
 		jdbcTemplate.update(sql, args);
 		System.out.println("inserted");
@@ -161,12 +173,12 @@ public class StudentsDaoImpl implements StudentsDao {
 		
 		String sql = "update students set name=?, fName=?, fOccupation=?, mName=?, mOccupation=?, contact=?, altContact=?, dob=?, "
 				+ " aadhar=?, bankName=?, accNo=?, ifsc=?, address=?, lastClassAttended=?, city=?, state=?, zip=?, branch=?, stuClass=?, "
-				+ "fees=?, gender=?, category=?, admissionDate=?,lastSchoolStudied=?, birthPlace=?, religion=?, session=? where scholarNumber=?" ;
+				+ "fees=?, gender=?, category=?, admissionDate=?,lastSchoolStudied=?, birthPlace=?, religion=?, session=?, samagraId=? where scholarNumber=?" ;
 		Object[] args = {dto.getName(), dto.getfName(), dto.getfOccupation(), dto.getmName(), dto.getmOccupation(), dto.getContact(),
 				dto.getAltContact(), dto.getDob(),  dto.getAadhar(), dto.getBankName(), dto.getAccNo(), dto.getIfsc(), dto.getAddress(),
 				dto.getLastClassAttended(), dto.getCity(), dto.getState(), dto.getZip(), dto.getBranch(), dto.getStuClass(),
 				dto.getFees(), dto.getGender(),dto.getCategory(), dto.getAdmissionDate(), dto.getLastSchoolStudied(), dto.getBirthPlace(), 
-				dto.getReligion(), dto.getSession(), dto.getScholarNumber()};
+				dto.getReligion(), dto.getSession(), dto.getScholarNumber(), dto.getSamagraId()};
 		int result= jdbcTemplate.update(sql, args);
 		System.out.println("Record updated");
 	}

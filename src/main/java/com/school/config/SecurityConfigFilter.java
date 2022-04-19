@@ -4,6 +4,7 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -32,15 +33,15 @@ public class SecurityConfigFilter extends WebSecurityConfigurerAdapter {
 	// Here we are making custom authorization flow
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-/*	http.authorizeRequests().anyRequest().permitAll(); //permit all endpoints
-	http.authorizeRequests().anyRequest().authenticated().and().httpBasic(); //Basic Http authorization
+	http.authorizeRequests().antMatchers(HttpMethod.POST,"/processPhoto","/saveAdmissison").permitAll().and().csrf().disable(); //permit all endpoints
+/*	http.authorizeRequests().anyRequest().authenticated().and().httpBasic(); //Basic Http authorization
 	http.authorizeRequests().anyRequest().authenticated().and().formLogin(); //FormLogin authorization
 	http.authorizeRequests().anyRequest().denyAll(); //will deny all end points
 
 	 Securing one or multiple endpoints
 		 authenticate() + formLogin() / httpBasic() -> Combination
 */
-		http.authorizeRequests().antMatchers("/stulist").authenticated().and().formLogin().loginPage("/customlogin").and().logout().and().exceptionHandling().accessDeniedPage("/accessdenied");
+//		http.authorizeRequests().antMatchers("/stulist").authenticated().and().formLogin().loginPage("/customlogin").and().logout().and().exceptionHandling().accessDeniedPage("/accessdenied");
  
 //		http.authorizeRequests().antMatchers("/stulist").hasAnyAuthority("user").and().formLogin().loginPage("/customlogin").and().logout();
 //		http.authorizeRequests().antMatchers("/stulist","/stusignup").authenticated().and().formLogin();

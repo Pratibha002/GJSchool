@@ -2,6 +2,8 @@ package com.school.dto;
 
 import java.sql.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class AdmissionDto {
 
 	public int id;
@@ -34,7 +36,51 @@ public class AdmissionDto {
 	public String birthPlace;
 	public String religion;
 	public String session;
+	public String aadharPhoto;		
+	public String studentPhoto;
+	public String samagraPhoto;
+	public String castPhoto ;
+	public String tcPhoto;
+	public String migrationPhoto;
 
+
+
+public String getStudentPhoto() {
+	return studentPhoto;
+}
+public void setStudentPhoto(String studentPhoto) {
+	this.studentPhoto = studentPhoto;
+}
+public String getSamagraPhoto() {
+	return samagraPhoto;
+}
+public void setSamagraPhoto(String samagraPhoto) {
+	this.samagraPhoto = samagraPhoto;
+}
+public String getCastPhoto() {
+	return castPhoto;
+}
+public void setCastPhoto(String castPhoto) {
+	this.castPhoto = castPhoto;
+}
+public String getTcPhoto() {
+	return tcPhoto;
+}
+public void setTcPhoto(String tcPhoto) {
+	this.tcPhoto = tcPhoto;
+}
+public String getMigrationPhoto() {
+	return migrationPhoto;
+}
+public void setMigrationPhoto(String migrationPhoto) {
+	this.migrationPhoto = migrationPhoto;
+}
+public String getAadharPhoto() {
+		return aadharPhoto;
+	}
+	public void setAadharPhoto(String aadharPhoto) {
+		this.aadharPhoto = aadharPhoto;
+	}
 	public int getFees() {
 		return fees;
 	}
