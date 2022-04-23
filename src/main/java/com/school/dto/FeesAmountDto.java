@@ -11,6 +11,63 @@ public class FeesAmountDto {
 	
 	public String amount;
 	public String date;
+	
+	
+	public String paymentMode;
+	public String senderBankName;
+	public String chequeNo;
+	public String chequeDate;
+	public String accNo;
+	public String recBank;
+	public String remark;
+	
+	
+	
+	
+	
+	public String getPaymentMode() {
+		return paymentMode;
+	}
+	public void setPaymentMode(String paymentMode) {
+		this.paymentMode = paymentMode;
+	}
+	public String getSenderBankName() {
+		return senderBankName;
+	}
+	public void setSenderBankName(String senderBankName) {
+		this.senderBankName = senderBankName;
+	}
+	public String getChequeNo() {
+		return chequeNo;
+	}
+	public void setChequeNo(String chequeNo) {
+		this.chequeNo = chequeNo;
+	}
+	public String getChequeDate() {
+		return chequeDate;
+	}
+	public void setChequeDate(String chequeDate) {
+		this.chequeDate = chequeDate;
+	}
+	public String getAccNo() {
+		return accNo;
+	}
+	public void setAccNo(String accNo) {
+		this.accNo = accNo;
+	}
+	
+	public String getRecBank() {
+		return recBank;
+	}
+	public void setRecBank(String recBank) {
+		this.recBank = recBank;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 	public String getBranch() {
 		return branch;
 	}

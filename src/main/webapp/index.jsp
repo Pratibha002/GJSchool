@@ -31,7 +31,7 @@
 <br>
 <a href="category">addCategory</a>
 <br> 
-<a href="form">Responsive form</a>
+<a href="adLogin">Administrative login</a>
 <br> 
 
 

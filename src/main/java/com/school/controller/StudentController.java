@@ -88,7 +88,7 @@ public class StudentController {
 		return "stuSignup";
 	}
 	
-	@RequestMapping("/adlogin")
+	@RequestMapping("/adLogin")
 	public String adLogin() {
 
 		return "adLogin";
@@ -161,14 +161,25 @@ public class StudentController {
 	@RequestMapping("/feesProcessing")
 	public String feesProcessing(Model model, @RequestParam("rollNo") String scholarNumber, HttpServletRequest request) {
 		System.out.println("Scholar Number "+scholarNumber);
-		//loop for first occurence of scholar number
+		
+		String paymentMode = request.getParameter("paymentMode");
+		String bankName = request.getParameter("bankName");
+		String chequeNo = request.getParameter("chequeNo");
+		String chequeDate = request.getParameter("chequeDate");
+		String accNo = request.getParameter("accNo");
+		String recBank = request.getParameter("recBank");
+		String remark = request.getParameter("remark");
+		
+		
 		String amount = request.getParameter("amount");
 		String date = request.getParameter("date");
 		
-		
 		System.out.println("amount and date is "+ amount+" " + date);
-			
-			feesDao.amountToDB(scholarNumber, amount, date);
+			System.out.println("date "+chequeDate);
+			if(chequeDate==null) {
+				chequeDate="NA";
+			}
+			feesDao.amountToDB(scholarNumber, amount, date, paymentMode, bankName, chequeNo, chequeDate, accNo, recBank, remark);
 				model.addAttribute("msg", "Fees Have been Saved ");	
 			return "redirect:/submitFees";
 	}

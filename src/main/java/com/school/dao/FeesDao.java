@@ -35,12 +35,13 @@ public class FeesDao {
 		}
 	}
 
-	public void amountToDB(String scholarNumber, String amount, String date) {
+	public void amountToDB(String scholarNumber, String amount, String date, String paymentMode,String  bankName,String  chequeNo,
+			String  chequeDate,String  accNo,String  recBank,String  remark) {
 		System.out.println(scholarNumber + amount + date);
 
-		String sql = "insert into feestransaction(scholarNumber,amount,date)values(?,?,?) ";
+		String sql = "insert into feestransaction(scholarNumber,amount,date,paymentMode, senderBankName, chequeNo, chequeDate, accNo, recBank, remark)values(?,?,?,?,?,?,?,?,?,?) ";
 			
-		Object[] args = { scholarNumber, amount, date };
+		Object[] args = { scholarNumber, amount, date, paymentMode, bankName, chequeNo, chequeDate, accNo, recBank, remark };
 
 		jdbcTemplate.update(sql, args);
 
