@@ -67,11 +67,11 @@ public class StudentsDaoImpl implements StudentsDao {
 	System.out.println("inside DB method");
 		String sql = "insert into students values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
 
-		Object[] args = { getPK()+1, dto.getfName(), dto.getfName(), dto.getfOccupation(), dto.getmName(), dto.getmOccupation(), dto.getContact(), 
+		Object[] args = { getPK()+1, dto.getName(), dto.getfName(), dto.getfOccupation(), dto.getmName(), dto.getmOccupation(), dto.getContact(), 
 						  dto.getAltContact(), dto.getDob(), dto.getSamagraId(), dto.getAadhar(), dto.getBankName(), dto.getAccNo(), 
 						  dto.getIfsc(), dto.getAddress(), dto.getLastClassAttended(), dto.getCity(), dto.getState(), dto.getZip(), 
 						  dto.getBranch(), dto.getStuClass(), dto.getFees(), dto.getGender(), dto.getCategory(), dto.getAdmissionDate(),
-						  dto.getScholarNumber(), dto.getLastSchoolStudied(), dto.getBirthPlace(), dto.getReligion(), dto.getSamagraId(),
+						  dto.getScholarNumber(), dto.getLastSchoolStudied(), dto.getBirthPlace(), dto.getReligion(), dto.getSession(),
 						  dto.getAadharPhoto(),dto.getStudentPhoto(),dto.getSamagraPhoto(), dto.getCastPhoto(), dto.getTcPhoto(), dto.getMigrationPhoto()};
 				;
 		jdbcTemplate.update(sql, args);
@@ -97,17 +97,21 @@ public class StudentsDaoImpl implements StudentsDao {
 		return studentList;
 	}
 	
+	//AND scholarNumber Like ?
+	//new String[] { "%" + scholarNumber + "%" },
 
-	public List<AdmissionDto> searchStudentbyBranch(String branch) {
-		String sql = "select * from students GROUP BY branch=?";
-		List<AdmissionDto> studentList = jdbcTemplate.query(sql,new StudentsMapper(),branch);
+	public List<AdmissionDto> searchStudentbyScholarNumber( String stuClasses,String searchValue,String branch,String session) {
+		String search = "%"+searchValue+"%";
+		String sql = "select * from students where stuClass=? AND scholarNumber Like ? AND branch=? AND session=?";
+		List<AdmissionDto> studentList = jdbcTemplate.query(sql,new StudentsMapper(),stuClasses,search, branch,session);
 		
 		return studentList;
 	}
 	
-	public List<AdmissionDto> searchStudentbyName(String name) {
-		String sql = "select * from students where name Like ?";
-		List<AdmissionDto> studentList = jdbcTemplate.query(sql,new StudentsMapper(),new String[] { "%" + name + "%" });
+	public List<AdmissionDto> searchStudentbyName(String stuClasses,String searchValue,String branch,String session) {
+		String search = "%"+searchValue+"%";
+		String sql = "select * from students where stuClass=? AND name Like ? AND branch=? AND session=?";
+		List<AdmissionDto> studentList = jdbcTemplate.query(sql,new StudentsMapper(),stuClasses,search, branch,session);
 		return studentList;
 	}
 	

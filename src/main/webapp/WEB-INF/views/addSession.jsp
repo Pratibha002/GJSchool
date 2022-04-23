@@ -15,10 +15,10 @@
  
 <form:form action="addsession" method="get" modelAttribute="session">
 
-			<label>Session Start : </label> <input type="text" name="sessionStart" placeholder="dd/mm/yyyy " />
+			<label>Session Start : </label> <input type="date" name="sessionStart" placeholder="dd/mm/yyyy " />
 			<Br>
 
-		<label>Session End : </label> <input type="text" name="sessionEnd" placeholder="dd/mm/yyyy" />
+		<label>Session End : </label> <input type="date" name="sessionEnd" placeholder="dd/mm/yyyy" />
 			<Br>
 
 			<input type="submit" value="Add Session">
@@ -26,7 +26,6 @@
 		</form:form>
 		
 		<br> <br>
-		
 		
 		<table border="">
 			<tr>
@@ -42,6 +41,7 @@
 			</j:forEach>
 			
 			</table>
+		
 </center>
 </body>
 </html>

@@ -35,7 +35,7 @@ public class FeesDao {
 		}
 	}
 
-	public void amountToDB(String scholarNumber, String amount, Date date) {
+	public void amountToDB(String scholarNumber, String amount, String date) {
 		System.out.println(scholarNumber + amount + date);
 
 		String sql = "insert into feestransaction(scholarNumber,amount,date)values(?,?,?) ";

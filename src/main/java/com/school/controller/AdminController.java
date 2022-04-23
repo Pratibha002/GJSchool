@@ -1,5 +1,7 @@
 package com.school.controller;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,10 +49,14 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/addsession")
-	public String addSession(@RequestParam("sessionStart") String sessionStart, @RequestParam("sessionEnd") String sessionEnd) {
+	public String addSession(@RequestParam("sessionStart") Date sessionStart, @RequestParam("sessionEnd") Date sessionEnd) {
 	List<String> sessionList = 	adminDao.listSession();
+	
+	SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy"); 
+	System.out.println("start date "+df.format(sessionStart));
+	
 	if(!sessionList.contains(sessionStart+"-"+sessionEnd)) {
-		adminDao.addSession(sessionStart, sessionEnd);	
+		adminDao.addSession(df.format(sessionStart), df.format(sessionEnd));	
 	}
 		return "redirect:/session";
 	}
@@ -104,9 +110,11 @@ public class AdminController {
 	
 	@RequestMapping("/deletesession")
 	public String delteSession(@RequestParam("session") String session) {
+		System.out.println(session);
 		String[]  sessionTime   = session.split("-");
 		String startSession = sessionTime[0];
 		String endSession = sessionTime[1];
+		System.out.println("start sessin "+startSession+ " "+ "End Session"+endSession);
 		adminDao.deleteSession(startSession, endSession);
 		return "redirect:/session";
 	}

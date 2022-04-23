@@ -12,7 +12,41 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
         integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
         crossorigin="anonymous"></script>
-<title>Insert title here</title>
+<title>Students List</title>
+
+	 <script type="text/javascript">
+            function validateform()
+            {
+            	
+            	var regex1 = /^[0-9]+$/ ;
+            	var regex2 = /^[A-Za-z]+$/ ;
+
+            	var isValid1 = regex1.test(document.getElementById("search").value);
+            	var isValid2 = regex2.test(document.getElementById("search").value);
+                
+            	var search = document.getElementById("search");
+            	
+            
+            	
+            	if (isValid1){
+                	
+                } else if( isValid2) {
+                    
+                }else{
+                	if(search.value.length>0){}
+                	alert("Please Enter Either Scholar Number Or Student Name");
+                	isValid=false;
+                	window.location.reload();
+                }
+         
+                return isValid;
+            	
+            };
+
+            
+        </script>
+
+
 </head>
 <body>
 
@@ -21,36 +55,39 @@
 <hr>
 <font color="green"> </font><h1>${msg }</h1> </font>
 <hr> 
-		<form action="searchByBranch">
+		<form action="searchStudents" onsubmit="return validateform()" >
 
 			<select name="branch">
-				<option value="Gyan Jyoti Public School">Gyan Jyoti Public
-					School</option>
-				<option value="Gyan Jyoti International School">Gyan Jyoti
-					International School</option>
+				<option value="Gyan Jyoti Public School">Gyan Jyoti Public School</option>
+				<option value="Gyan Jyoti International School">Gyan Jyoti International School
+				</option>
 			</select>
-			<input type="submit" value="submit">
-		</form>
-
-
-
-		<form action="searchByRollNo">
-			<label>Roll No : </label> <input type="text" name="rollNo"><br>
-			<input type="submit" value="submit">
-		</form>
-		<span> </span>
-		<form action="searchByName">
-			<label>Name : </label> <input type="text" name="name"><br>
-			<input type="submit" value="submit">
-		</form>
-		<span> </span>
-		<form action="searchByClass" method="get">
+		<br> 
+		
+					<div class="form-group col-md-6">
+					<label for="form:inputState">Session</label> <select name="session" >
+						<j:forEach var="session" items="${session}">
+					<option value="${session}">${session}</option>
+					</j:forEach>
+					</select>
+				</div>
+		<Br>
+		
+		
+		
+		<label>Classes : </label> 
 			<select name="classes">
 				<j:forEach var="classe" items="${classes}">
-					<option value="${classe}">${classe}</option>
+					<option value="${classe.classes}">${classe.classes}</option>
 				</j:forEach>
-				<input type="submit" value="submit">
 			</select>
+			
+		<br>	
+			<label>Scholar Number / Name : </label> <input type="text" id="search" name="searchValue"><br>
+			
+		<!-- 	<label>Name : </label> <input type="text" name="name"> --><br>
+			<input type="submit" value="submit">
+		
 		</form>
 
 
@@ -67,6 +104,7 @@
 			<tr>
 				<td>S.No</td>
 				<td>Scholar No</td>
+				<td> Class </td>
 				<td> Name </td>
 				<td>Father Name</td>
 				<td>Classes</td>
@@ -79,6 +117,7 @@
 				<td> Aadhar </td>
 				<td> Samagra </td>
 				<td> Branch </td>
+				<td> Session </td>
 				<td> Student Photo </td>
 				<td>Fees Details</td>
 				<td>Remainin Fees</td>
@@ -89,6 +128,7 @@
 				<tr>
 					<td>${stu.id}</td>
 					<td>${stu.scholarNumber}</td>
+					<td>${stu.stuClass} </td>
 					<td>${stu.name}</td>
 					<td>${stu.fName}</td>
 					<td>${stu.stuClass}</td>
@@ -101,10 +141,11 @@
 					<td>${stu.aadhar} </td>
 					<td>${stu.samagraId} </td>
 					<td>${stu.branch} </td>
+					<td>${stu.session} </td>
 					<td><img id="aadharPreview" src="data:image/jpeg;base64,${stu.studentPhoto}" height="40" width="40"></td>
 					<td> <a href="submitFees"> Submit Fees</a></td> 
 					<td><j:forEach var="fees" items="${remFeesList}">
-							<j:if test="${stu.scholarNumber==fees.scholarNumber}">${stu.fees-fees.amount }</j:if>
+							<j:if test="${stu.scholarNumber==fees.scholarNumberOrName}">${stu.fees-fees.amount }</j:if>
 						</j:forEach> </td>
 					<td><a href="admissionForm"> Add</a></td>
 					<td><a href="updateStudents?userId=${stu.id}"> update</a></td>

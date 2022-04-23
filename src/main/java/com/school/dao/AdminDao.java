@@ -1,7 +1,9 @@
 package com.school.dao;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,9 +39,9 @@ public class AdminDao {
 	return classes;
 }
 	
-	public void addSession(String sessionStart, String sessionEnd) {
+	public void addSession(String startSession, String endSession) {
 		String sql = "insert into session(startSession, endSession) values(?,?)";
-		jdbcTemplate.update(sql, sessionStart,sessionEnd);
+		jdbcTemplate.update(sql, startSession,endSession);
 		
 	}
 
@@ -58,10 +60,11 @@ public class AdminDao {
             }
         });
 		
-		List<String> session = new ArrayList<String>();
+		ArrayList<String> session = new ArrayList<String>();
+		
 		
 		for(int i =0; i<sessionStart.size(); i++) {
-			session.add(sessionStart.get(i)+"-"+sessionEnd.get(i));
+		session.add(sessionStart.get(i)+"-"+sessionEnd.get(i));
 		}
 	return session;
 }

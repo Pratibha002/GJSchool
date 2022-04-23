@@ -86,9 +86,17 @@ public class StudentController {
 	}
 	
 	@RequestMapping("/submitFees")
-	public String submitFees(Model model) {
+	public String submitFees(Model model, FeesAmountDto dto) {
+	
 		List<AdmissionDto> studentsList = studentsDao.listStudents();
+		List<String> session = adminDao.listSession();
+		List<FeesClassesDto> classesList = adminDao.listClasses();
+		
+		model.addAttribute("classes", classesList);		
 		model.addAttribute("studentsList", studentsList);
+		model.addAttribute("session", session);
+		model.addAttribute("feesAmountDto", dto);
+		
 		return "submitFees";
 	}
 	
@@ -96,27 +104,106 @@ public class StudentController {
 	public String feesSummary(Model model, @RequestParam("rollNo") String scholarNumber) {
 			List<FeesAmountDto> feesDto = feesDao.feesSummary(scholarNumber);
 			AdmissionDto stuDto = studentsDao.getStudentbyscholarNumber(scholarNumber);
+			
+
 			model.addAttribute("feesDto", feesDto);
 			model.addAttribute("stuDto",stuDto);
+			model.addAttribute("scholarNumber", scholarNumber);
 			return "feesSummary";
 	}
 	
 	
-	@RequestMapping("/searchByBranch")
-	public String searchByBranch(@RequestParam("branch") String branch, Model model) {
-		System.out.println("branch name "+branch);
-		List<AdmissionDto> studentsList = studentsDao.searchStudentbyBranch(branch);
+	
+	@RequestMapping("/submitFeesProcessing")
+	public String submitFeesProcessing(Model model, FeesAmountDto dto) {
+		System.out.println(dto.toString());
+		
+
+		if(dto.getScholarNumberOrName().matches("[0-9]+")) {
+			System.out.println("searc by scholar Number");
+			List<AdmissionDto> studentsList = studentsDao.searchStudentbyScholarNumber(dto.getStuClass(),dto.getScholarNumberOrName(),dto.getBranch(),dto.getSession());
+			System.out.println("list size "+ studentsList.size());
+			model.addAttribute("studentsList", studentsList);	model.addAttribute("studentsList", studentsList);
+		}else {
+			System.out.println("searc by Name ");
+			List<AdmissionDto> studentsList = studentsDao.searchStudentbyName(dto.getStuClass(),dto.getScholarNumberOrName(),dto.getBranch(),dto.getSession());
+			System.out.println("list size "+ studentsList.size());
+			model.addAttribute("studentsList", studentsList);	model.addAttribute("studentsList", studentsList);		}
+		
+		
 		
 		List<FeesAmountDto> remFeesList = studentsDao.remainingFees();
 		int totalFees =  studentsDao.totalFees();
 		int totalRemFees = studentsDao.totalRemainingFees();
 		
-		model.addAttribute("studentsList", studentsList);
+		List<FeesClassesDto> classesList = adminDao.listClasses();
+		model.addAttribute("classes", classesList);		
+	
+		model.addAttribute("remFeesList",remFeesList);
+		model.addAttribute("totalFees", totalFees);
+		model.addAttribute("totalRemFees", totalRemFees);
+
+		
+		return "/submitFees";
+	}
+
+	
+	
+	@RequestMapping("/feesProcessing")
+	public String feesProcessing(Model model, @RequestParam("rollNo") String scholarNumber, HttpServletRequest request) {
+		System.out.println("Scholar Number "+scholarNumber);
+		//loop for first occurence of scholar number
+		String amount = request.getParameter("amount");
+		String date = request.getParameter("date");
+		
+		
+		System.out.println("amount and date is "+ amount+" " + date);
+			
+			feesDao.amountToDB(scholarNumber, amount, date);
+				model.addAttribute("msg", "Fees Have been Saved ");	
+			return "redirect:/submitFees";
+	}
+	
+	
+	
+	@RequestMapping(value="/searchStudents")
+	public String searchByBranch(@RequestParam("branch") String branch,@RequestParam("classes") String stuClasses,
+			@RequestParam("searchValue") String searchValue, @RequestParam("session") String session, Model model) {
+
+		System.out.println("branch "+branch);
+		System.out.println("stu class "+stuClasses);
+		System.out.println("scholarNumber "+searchValue);
+		System.out.println("session  is "+session);
+		
+		if(searchValue.matches("[0-9]+")) {
+			List<AdmissionDto> studentsList = studentsDao.searchStudentbyScholarNumber(stuClasses,searchValue,branch,session);
+			System.out.println("list size "+ studentsList.size());
+			model.addAttribute("studentsList", studentsList);	model.addAttribute("studentsList", studentsList);
+		}else {
+			List<AdmissionDto> studentsList = studentsDao.searchStudentbyName(stuClasses,searchValue,branch,session);
+			System.out.println("list size "+ studentsList.size());
+			model.addAttribute("studentsList", studentsList);	model.addAttribute("studentsList", studentsList);		}
+		
+		
+		
+		List<FeesAmountDto> remFeesList = studentsDao.remainingFees();
+		int totalFees =  studentsDao.totalFees();
+		int totalRemFees = studentsDao.totalRemainingFees();
+		
+		List<FeesClassesDto> classesList = adminDao.listClasses();
+		model.addAttribute("classes", classesList);		
+	
 		model.addAttribute("remFeesList",remFeesList);
 		model.addAttribute("totalFees", totalFees);
 		model.addAttribute("totalRemFees", totalRemFees);
 		return "studentsList";
 	}
+	
+	
+	
+
+	
+	
 	
 	
 	@RequestMapping("/searchByRollNo")
@@ -145,36 +232,22 @@ public class StudentController {
 		return "studentsList";
 	}
 	
-	@RequestMapping("/searchByName")
-	public String searchByName(@RequestParam("name") String name, Model model) {
-		List<AdmissionDto> studentsList = studentsDao.searchStudentbyName(name);
-		model.addAttribute("studentsList", studentsList);
-		List<FeesAmountDto> remFeesList = studentsDao.remainingFees();
-		int totalFees =  studentsDao.totalFees();
-		int totalRemFees = studentsDao.totalRemainingFees();
-		model.addAttribute("remFeesList",remFeesList);
-		model.addAttribute("totalFees", totalFees);
-		model.addAttribute("totalRemFees", totalRemFees);
-		return "studentsList";
-	}
 	
-	@RequestMapping("/submitFeesProcessing")
-	public String submitFeesProcessing(Model model, FeesAmountDto dto,@RequestParam String scholarNumber,@RequestParam String amount,@RequestParam Date date) {
-		
-		feesDao.amountToDB(scholarNumber, amount, date);
-		return "redirect:/submitFees";
-	}
+	
 	
 
 
 	@RequestMapping("/studentsList")
 	public String studentsList(Model model) {
-		List<String> classes = studentsDao.listOfclasses();
+		List<FeesClassesDto> classesList = adminDao.listClasses();
+	//	List<String> classes = studentsDao.listOfclasses();
 		List<AdmissionDto> studentsList = studentsDao.listStudents();
 		List<FeesAmountDto> remFeesList = studentsDao.remainingFees();
 		int totalFees =  studentsDao.totalFees();
 		int totalRemFees = studentsDao.totalRemainingFees();
-		model.addAttribute("classes", classes);
+		List<String> session = adminDao.listSession();
+		model.addAttribute("session", session);
+		model.addAttribute("classes", classesList);
 		model.addAttribute("studentsList", studentsList);
 		model.addAttribute("remFeesList",remFeesList);
 		model.addAttribute("totalFees", totalFees);

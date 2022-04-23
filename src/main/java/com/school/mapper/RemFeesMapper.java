@@ -12,7 +12,7 @@ public class RemFeesMapper  implements RowMapper<FeesAmountDto>{
 	@Override
 	public FeesAmountDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 		FeesAmountDto fees= new FeesAmountDto();
-		fees.setScholarNumber(rs.getString(1));
+		fees.setScholarNumberOrName(rs.getString(1));
 		fees.setAmount(rs.getString(2));
 		return fees;
 	} 
