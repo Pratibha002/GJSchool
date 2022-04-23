@@ -45,15 +45,24 @@ public class StudentController {
 	@Autowired
 	public AdminDao adminDao;
 
+	@RequestMapping("/form")
+	public String form( Model model, AdmissionDto dto ) {
+		List<FeesClassesDto> classesList = adminDao.listClasses();
+		List<String> listCategory = adminDao.listCategory();
+		List<String> session = adminDao.listSession();
+		
+		model.addAttribute("session", session);
+		model.addAttribute("classesList", classesList);
+		model.addAttribute("listCategory", listCategory);
+		model.addAttribute("admissionDto", dto);		
+		return "form";
+	}
+
 	
 	@RequestMapping("/photoUpload")
 	public String photoUpload( ) {
 		return "photoUpload";
 	}
-	
-	
-	
-	
 	@RequestMapping("/admissionForm")
 	public String admissionForm(Model model, AdmissionDto dto ) {
 		List<FeesClassesDto> classesList = adminDao.listClasses();
@@ -331,6 +340,22 @@ public class StudentController {
 			System.out.println("update method called");
 			studentsDao.updateStudent(dto);
 		}
+		
+		
+		List<FeesClassesDto> classesList = adminDao.listClasses();
+		List<AdmissionDto> studentsList = studentsDao.listStudents();
+		List<FeesAmountDto> remFeesList = studentsDao.remainingFees();
+		int totalFees =  studentsDao.totalFees();
+		int totalRemFees = studentsDao.totalRemainingFees();
+		List<String> session = adminDao.listSession();
+		model.addAttribute("session", session);
+		model.addAttribute("classes", classesList);
+		model.addAttribute("studentsList", studentsList);
+		model.addAttribute("remFeesList",remFeesList);
+		model.addAttribute("totalFees", totalFees);
+		model.addAttribute("totalRemFees", totalRemFees);
+
+		
 		
 		
 		model.addAttribute("msg", "Student Enrolled Successfully");

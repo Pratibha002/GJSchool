@@ -42,8 +42,11 @@
 <body>
 <jsp:include page="../../verMenu.jsp"></jsp:include>
 	<center>
-		
-		
+		<h2>Payment Mode</h2>
+	<br >
+	
+	
+	
 		
 		<form action="feesProcessing" onsubmit="return validateform()" >
 			<hr>
@@ -71,9 +74,7 @@
 				<td>Amount</td>
 				<td>Date</td>
 			</tr>
-			Aman
- 
- 
+			
 			<j:forEach var="fees" items="${feesDto}">
 				<tr>
 					<td></td>

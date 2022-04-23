@@ -25,6 +25,17 @@
 <br> 
 <a href="session">Session</a>
 <br> 
+<a href="classes">addClasses</a>
+<br> 
+<a href="session">addSession</a>
+<br>
+<a href="category">addCategory</a>
+<br> 
+<a href="form">Responsive form</a>
+<br> 
+
+
+
 
 
 </body>
