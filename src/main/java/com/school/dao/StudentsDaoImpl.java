@@ -109,6 +109,15 @@ public class StudentsDaoImpl implements StudentsDao {
 		return studentList;
 	}
 	
+	
+	public List<AdmissionDto> searchStudent( String stuClasses,String branch,String session) {
+		String sql = "select * from students where stuClass=?  AND branch=? AND session=?";
+		List<AdmissionDto> studentList = jdbcTemplate.query(sql,new StudentsMapper(),stuClasses, branch,session);
+		
+		return studentList;
+	}
+	
+	
 	public List<AdmissionDto> searchStudentbyName(String stuClasses,String searchValue,String branch,String session) {
 		String search = "%"+searchValue+"%";
 		String sql = "select * from students where stuClass=? AND name Like ? AND branch=? AND session=?";

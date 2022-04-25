@@ -180,15 +180,23 @@ public class StudentController {
 
 		System.out.println("branch "+branch);
 		System.out.println("stu class "+stuClasses);
-		System.out.println("scholarNumber "+searchValue);
+		System.out.println("searchValue "+searchValue);
 		System.out.println("session  is "+session);
 		
-		if(searchValue.matches("[0-9]+")) {
-			List<AdmissionDto> studentsList = studentsDao.searchStudentbyScholarNumber(stuClasses,searchValue,branch,session);
+		String	search =searchValue.substring(0,searchValue.length()-1);
+		if(search.length()==0) {
+			System.out.println(stuClasses +" " + branch +" "+ session );
+		List<AdmissionDto> studentsList = studentsDao.searchStudent(stuClasses,branch,session);
+		model.addAttribute("studentsList", studentsList);
+		}else if(search.charAt(0)==',') {
+			System.out.println("search by scholar number"+ search);
+			String searchSch = search.substring(1,searchValue.length()-1);
+			List<AdmissionDto> studentsList = studentsDao.searchStudentbyScholarNumber(stuClasses,searchSch,branch,session);
 			System.out.println("list size "+ studentsList.size());
 			model.addAttribute("studentsList", studentsList);	model.addAttribute("studentsList", studentsList);
 		}else {
-			List<AdmissionDto> studentsList = studentsDao.searchStudentbyName(stuClasses,searchValue,branch,session);
+			System.out.println("search by name "+ search);
+			List<AdmissionDto> studentsList = studentsDao.searchStudentbyName(stuClasses,search,branch,session);
 			System.out.println("list size "+ studentsList.size());
 			model.addAttribute("studentsList", studentsList);	model.addAttribute("studentsList", studentsList);		}
 		
@@ -199,8 +207,11 @@ public class StudentController {
 		int totalRemFees = studentsDao.totalRemainingFees();
 		
 		List<FeesClassesDto> classesList = adminDao.listClasses();
+		List<String> sessionList = adminDao.listSession();
+		
+
+		model.addAttribute("session", sessionList);
 		model.addAttribute("classes", classesList);		
-	
 		model.addAttribute("remFeesList",remFeesList);
 		model.addAttribute("totalFees", totalFees);
 		model.addAttribute("totalRemFees", totalRemFees);
