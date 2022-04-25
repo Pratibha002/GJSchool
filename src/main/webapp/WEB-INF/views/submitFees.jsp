@@ -24,32 +24,25 @@
 <title>Students List</title>
 
 	 <script type="text/javascript">
-            function validateform()
+
+     
+	 function searchModeDetails()
+     {	
+		 var searchMode = document.getElementById("searchMode");
+		 var searchByName =  document.getElementById("searchByName");
+		 var searchByScholarNumber=  document.getElementById("searchByScholarNumber");
+		 
+		 searchByName.style.display = searchMode.value == "name" ? "block" : "none";
+		 searchByScholarNumber.style.display = searchMode.value == "scholarNumber" ? "block" : "none";
+		
+     }	 
+	 
+	 function validateform()
             {
             	
-            	var regex1 = /^[0-9]+$/ ;
-            	var regex2 = /^[A-Za-z]+$/ ;
-
-            	var isValid1 = regex1.test(document.getElementById("search").value);
-            	var isValid2 = regex2.test(document.getElementById("search").value);
-                
-            	var search = document.getElementById("search");
-            	
-            
-            	
-            	if (isValid1){
-                	
-                } else if( isValid2) {
-                    
-                }else{
-                	if(search.value.length>0){}
-                	alert("Please Enter Either Scholar Number Or Student Name");
-                	isValid=false;
-                	window.location.reload();
-                }
-         
+				isValid=true;         
                 return isValid;
-            	
+            	   	
             };
 
             
@@ -89,10 +82,24 @@
 					<option value="${classe.classes}">${classe.classes}</option>
 				</j:forEach>
 			</select>
-			
-		<br>	
-			<label>Scholar Number / Name : </label> <input type="text" id="search" name="searchValue"><br>
-			
+<br>			
+				
+<label> Search By :</label> 
+	<select name="searchMode" id="searchMode" onchange = "searchModeDetails()"> 
+	<option value="name"> Choose </option>
+	<option value="name"> Name </option>
+	<option value="scholarNumber"> Scholar Number</option>
+	</select>
+		
+		<div id="searchByName" style="display: none"> 
+		<label> Name </label> <input type="text" id="search" name="searchValue">
+		</div>
+		
+		<div id="searchByScholarNumber" style="display: none"> 
+		<label> Scholar Number</label><input type="text" id="search" name="searchValue"> 
+		</div>
+		
+			<br>
 			<input type="submit" value="submit">
 		
 		</form>
