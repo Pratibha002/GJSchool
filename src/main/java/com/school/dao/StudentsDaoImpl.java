@@ -43,6 +43,7 @@ public class StudentsDaoImpl implements StudentsDao {
 	
 	public int getStudentFees(String stuClass) {
 		int fees = 0;
+		System.out.println("classes in dao "+stuClass);
 		String sql = "select * from classes ";
 		List<FeesClassesDto> classes = jdbcTemplate.query(sql,new RowMapper<FeesClassesDto>() {
             public FeesClassesDto mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -54,11 +55,11 @@ public class StudentsDaoImpl implements StudentsDao {
         });
 
 		for(FeesClassesDto dto : classes) {
-			System.out.println(dto);
 			if(dto.getClasses().equals(stuClass)) {
 				fees=dto.getFees();
-				};
 				break;
+			};
+
 		}
 		return fees;
 	}
@@ -138,8 +139,27 @@ public class StudentsDaoImpl implements StudentsDao {
 		//displayStudent(studentList);
 		return studentList;
 	}
+	
 
+	public Integer remainFeesByScholarNumber(String scholarNumber) {
+		String sql = "SELECT SUM(amount) FROM feestransaction WHERE scholarNumber=?";
+	List<Integer> classes = jdbcTemplate.query(sql,new RowMapper<Integer>() {
+        public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+            return rs.getInt(1);
+        }
+    },scholarNumber);
+	return classes.get(0); 
+	}
+	
 	public List<FeesAmountDto> remainingFees() {
+		String sql ="SELECT scholarNumber,SUM(amount) FROM feestransaction GROUP BY scholarNumber";
+	List<FeesAmountDto> feesDto = 	jdbcTemplate.query(sql, new RemFeesMapper());
+	System.out.println("list returned");
+	return feesDto;
+	}
+	
+	
+	public List<FeesAmountDto> remainingFeesOfStudents() {
 		String sql ="SELECT scholarNumber,SUM(amount) FROM feestransaction GROUP BY scholarNumber";
 	List<FeesAmountDto> feesDto = 	jdbcTemplate.query(sql, new RemFeesMapper());
 	System.out.println("list returned");
@@ -174,7 +194,6 @@ public class StudentsDaoImpl implements StudentsDao {
 
 	//samagra Id is giving issue
 	public void updateStudent(AdmissionDto dto) {
-		
 		String sql = "update students set name=?, fName=?, fOccupation=?, mName=?, mOccupation=?, contact=?, altContact=?, dob=?, "
 				+ " aadhar=?, bankName=?, accNo=?, ifsc=?, address=?, lastClassAttended=?, city=?, state=?, zip=?, branch=?, stuClass=?, "
 				+ "fees=?, gender=?, category=?, admissionDate=?,lastSchoolStudied=?, birthPlace=?, religion=?, session=?, samagraId=? where scholarNumber=?" ;
@@ -182,7 +201,7 @@ public class StudentsDaoImpl implements StudentsDao {
 				dto.getAltContact(), dto.getDob(),  dto.getAadhar(), dto.getBankName(), dto.getAccNo(), dto.getIfsc(), dto.getAddress(),
 				dto.getLastClassAttended(), dto.getCity(), dto.getState(), dto.getZip(), dto.getBranch(), dto.getStuClass(),
 				dto.getFees(), dto.getGender(),dto.getCategory(), dto.getAdmissionDate(), dto.getLastSchoolStudied(), dto.getBirthPlace(), 
-				dto.getReligion(), dto.getSession(), dto.getScholarNumber(), dto.getSamagraId()};
+				dto.getReligion(), dto.getSession(), dto.getSamagraId(),dto.getScholarNumber(),};
 		int result= jdbcTemplate.update(sql, args);
 		System.out.println("Record updated");
 	}

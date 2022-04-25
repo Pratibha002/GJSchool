@@ -8,14 +8,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
-    integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
-    crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
-    integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
-    crossorigin="anonymous"></script>
+
+    
+     <link rel = "stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+      <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src = "https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <style>
         @media (min-width: 1025px) {
   .h-custom {
@@ -60,7 +57,7 @@
 }
 
     </style>
-
+  
 
 	 <script type="text/javascript">
             function validateform()
@@ -375,7 +372,8 @@
     <title>Registration Form</title>
 </head>
 <body>
-<form:form action="saveAdmissison" modelAttribute="admissionDto" method="post" enctype="multipart/form-data" onsubmit="return validateform()">
+<jsp:include page="../../verMenu.jsp"></jsp:include>
+<form:form action="saveAdmissison" modelAttribute="admissionDto" method="post" enctype="multipart/form-data" onsubmit="return !validateform()">
     
 			<form:input type="hidden" path="id" />
     
@@ -453,29 +451,33 @@
         
                               <div class="form-outline">
                                 <label class="form-label" for="form3Examplev2">Class</label>
-                                				<div class="form-control form-control-lg">
+
 					<form:select path="stuClass">
 					<j:forEach var="classesList" items="${classesList}">
 					<option value="${classesList.classes}">${classesList.classes}</option>
 					</j:forEach>
 					</form:select>
-				</div>
-                                
+
+
+<!--  for populating Class
+					<form:select path="stuClass">
+ 					<option value="">${admissionDto.stuClass}</option>  
+					</form:select>-->
+	                            
                               </div>
+
         
                             </div>
                             <div class="col-md-6 mb-4 pb-2">
         
                               <div class="form-outline">
                                 <label class="form-label" for="form3Examplev3">Last Class Attended</label>
-				<div class="form-control form-control-lg">
 					 <form:select path="lastClassAttended">
 					<j:forEach var="classesList" items="${classesList}">
 					<option value="${classesList.classes}">${classesList.classes}</option>
 					</j:forEach>
 					</form:select>
-				</div>
-
+			
                               </div>
         
                             </div>
@@ -486,13 +488,11 @@
         
                               <div class="form-outline">
                                 <label class="form-label" for="form3Examplev2">Branch</label>
-                              <div class="form-control form-control-lg">
-					 <form:select path="branch" >
+           		 <form:select path="branch" >
 						<option value="Gyan Jyoti Public School">Gyan Jyoti Public School</option>
 						<option value="Gyan Jyoti International School">Gyan Jyoti International School</option>
 					</form:select>
-				</div>
-                              </div>
+			                  </div>
         
                             </div>
                             <div class="col-md-6 mb-4 pb-2">
@@ -536,14 +536,14 @@
                             <div class="row">
                             <div class="col-md-6 mb-4 pb-2">
         
-                              <div class="form-outline">
-                                <label class="form-label" for="form3Examplev2">Category</label>
-                                <form:select path="category" >
-    <j:forEach var="listCategory" items="${listCategory}">
-					<option value="${listCategory}">${listCategory}</option>
-					</j:forEach>
-			</form:select>
-                              </div>
+                            <div class="form-outline">
+							   <label class="form-label" for="form3Examplev2">Category</label><br>
+							    <form:select path="category" >
+								    <j:forEach var="listCategory" items="${listCategory}">
+									<option value="${listCategory}">${listCategory}</option>
+									</j:forEach>
+								</form:select>
+                             </div>
         
                             </div>
                             <div class="col-md-6 mb-4 pb-2">
@@ -555,6 +555,10 @@
         
                             </div>
                           </div>
+                          
+                          
+                          
+                          
                           <div class="row">
                             <div class="col-md-6 mb-4 pb-2">
         
@@ -670,7 +674,7 @@
                           <div class="mb-4 pb-2">
                           <div class="form-outline form-white">
 							<label class="form-label" for="form3Examplea3">Address </label>
-                            <input type="text" id="address" class="form-control form-control-lg" />
+                            <form:input type="text" path="address" id="address" class="form-control form-control-lg" />
                           </div>
                         </div>      
                         
@@ -749,10 +753,8 @@
                           </div>
                         </div>
                         
-                        
-                        
       
-                        <input type="submit" class="btn btn-light btn-lg" data-mdb-ripple-color="dark" value="Admission Confirm">
+                        <input type="submit" class="btn btn-light btn-lg" data-mdb-ripple-color="dark" value="Admission Confirmm">
       	<br> 
 		      
                       </div>

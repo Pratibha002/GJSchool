@@ -33,11 +33,16 @@ public class SecurityConfigFilter extends WebSecurityConfigurerAdapter {
 	// Here we are making custom authorization flow
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-	http.authorizeRequests().antMatchers(HttpMethod.POST,"/processPhoto","/saveAdmissison").authenticated().and().formLogin().loginPage("/customlogin").and().csrf().disable(); //permit all endpoints
+	
+		http.authorizeRequests().antMatchers(HttpMethod.POST,"/processPhoto","/saveAdmissison").permitAll().and().csrf().disable();
+		
+//	http.authorizeRequests().antMatchers(HttpMethod.POST,"/processPhoto","/saveAdmissison").permitAll().and().formLogin().loginPage("/customlogin").and().csrf().disable(); //permit all endpoints
 /*	http.authorizeRequests().anyRequest().authenticated().and().httpBasic(); //Basic Http authorization
 	http.authorizeRequests().anyRequest().authenticated().and().formLogin(); //FormLogin authorization
 	http.authorizeRequests().anyRequest().denyAll(); //will deny all end points
-
+*/
+//	http.authorizeRequests().anyRequest().permitAll(); //will deny all end points
+/*
 	 Securing one or multiple endpoints
 		 authenticate() + formLogin() / httpBasic() -> Combination
 */

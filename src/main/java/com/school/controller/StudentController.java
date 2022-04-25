@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -57,7 +58,12 @@ public class StudentController {
 		model.addAttribute("admissionDto", dto);		
 		return "form";
 	}
-
+	
+	@RequestMapping("/welcome")
+	public String welcome( ) {
+		return "welcome";
+	}
+	
 	
 	@RequestMapping("/photoUpload")
 	public String photoUpload( ) {
@@ -96,72 +102,53 @@ public class StudentController {
 	
 	@RequestMapping("/submitFees")
 	public String submitFees(Model model, FeesAmountDto dto) {
-	
+
+		int totalFees =  studentsDao.totalFees();
+		int totalRemFees = studentsDao.totalRemainingFees();
+		
+		List<FeesAmountDto> remFeesList = studentsDao.remainingFeesOfStudents();
+		
+
+		
 		List<AdmissionDto> studentsList = studentsDao.listStudents();
 		List<String> session = adminDao.listSession();
 		List<FeesClassesDto> classesList = adminDao.listClasses();
 		
+		
+		model.addAttribute("totalFees", totalFees);
+		model.addAttribute("totalRemFees", totalRemFees);
 		model.addAttribute("classes", classesList);		
 		model.addAttribute("studentsList", studentsList);
 		model.addAttribute("session", session);
 		model.addAttribute("feesAmountDto", dto);
+		model.addAttribute("remFeesList", remFeesList);
 		
 		return "submitFees";
 	}
 	
 	@RequestMapping("/feesSummary")
-	public String feesSummary(Model model, @RequestParam("rollNo") String scholarNumber) {
+	public String feesSummary(Model model, @RequestParam("scholarNumber") String scholarNumber, HttpServletRequest request) {
 			List<FeesAmountDto> feesDto = feesDao.feesSummary(scholarNumber);
 			AdmissionDto stuDto = studentsDao.getStudentbyscholarNumber(scholarNumber);
 			
-
+			String msg = request.getParameter("msg");
+			
+			int remFees = studentsDao.remainFeesByScholarNumber(scholarNumber);
+			
 			model.addAttribute("feesDto", feesDto);
 			model.addAttribute("stuDto",stuDto);
 			model.addAttribute("scholarNumber", scholarNumber);
+			model.addAttribute("msg",msg);
+			model.addAttribute("remFees", remFees);
 			return "feesSummary";
 	}
 	
 	
-	
-	@RequestMapping("/submitFeesProcessing")
-	public String submitFeesProcessing(Model model, FeesAmountDto dto) {
-		System.out.println(dto.toString());
 		
-
-		if(dto.getScholarNumberOrName().matches("[0-9]+")) {
-			System.out.println("searc by scholar Number");
-			List<AdmissionDto> studentsList = studentsDao.searchStudentbyScholarNumber(dto.getStuClass(),dto.getScholarNumberOrName(),dto.getBranch(),dto.getSession());
-			System.out.println("list size "+ studentsList.size());
-			model.addAttribute("studentsList", studentsList);	model.addAttribute("studentsList", studentsList);
-		}else {
-			System.out.println("searc by Name ");
-			List<AdmissionDto> studentsList = studentsDao.searchStudentbyName(dto.getStuClass(),dto.getScholarNumberOrName(),dto.getBranch(),dto.getSession());
-			System.out.println("list size "+ studentsList.size());
-			model.addAttribute("studentsList", studentsList);	model.addAttribute("studentsList", studentsList);		}
-		
-		
-		
-		List<FeesAmountDto> remFeesList = studentsDao.remainingFees();
-		int totalFees =  studentsDao.totalFees();
-		int totalRemFees = studentsDao.totalRemainingFees();
-		
-		List<FeesClassesDto> classesList = adminDao.listClasses();
-		model.addAttribute("classes", classesList);		
-	
-		model.addAttribute("remFeesList",remFeesList);
-		model.addAttribute("totalFees", totalFees);
-		model.addAttribute("totalRemFees", totalRemFees);
-
-		
-		return "/submitFees";
-	}
-
-	
 	
 	@RequestMapping("/feesProcessing")
-	public String feesProcessing(Model model, @RequestParam("rollNo") String scholarNumber, HttpServletRequest request) {
-		System.out.println("Scholar Number "+scholarNumber);
-		
+	public String feesProcessing(Model model, @RequestParam("scholarNumber") String scholarNumber, HttpServletRequest request ) {
+			
 		String paymentMode = request.getParameter("paymentMode");
 		String bankName = request.getParameter("bankName");
 		String chequeNo = request.getParameter("chequeNo");
@@ -181,7 +168,8 @@ public class StudentController {
 			}
 			feesDao.amountToDB(scholarNumber, amount, date, paymentMode, bankName, chequeNo, chequeDate, accNo, recBank, remark);
 				model.addAttribute("msg", "Fees Have been Saved ");	
-			return "redirect:/submitFees";
+				model.addAttribute("scholarNumber", scholarNumber);
+			return "redirect:/feesSummary";
 	}
 	
 	
@@ -253,16 +241,15 @@ public class StudentController {
 	}
 	
 	
-	
-	
-
-
 	@RequestMapping("/studentsList")
 	public String studentsList(Model model) {
 		List<FeesClassesDto> classesList = adminDao.listClasses();
-	//	List<String> classes = studentsDao.listOfclasses();
 		List<AdmissionDto> studentsList = studentsDao.listStudents();
 		List<FeesAmountDto> remFeesList = studentsDao.remainingFees();
+		
+		List<String> scholarList = 	studentsDao.getListOfScholarNumbers();
+		
+		
 		int totalFees =  studentsDao.totalFees();
 		int totalRemFees = studentsDao.totalRemainingFees();
 		List<String> session = adminDao.listSession();
@@ -272,6 +259,7 @@ public class StudentController {
 		model.addAttribute("remFeesList",remFeesList);
 		model.addAttribute("totalFees", totalFees);
 		model.addAttribute("totalRemFees", totalRemFees);
+		
 		return "studentsList";
 	}
 	
@@ -301,7 +289,7 @@ public class StudentController {
 	
 	
 	@RequestMapping("/deleteStudent")
-	public String deleteStudent(@RequestParam("rollNo") String rollNo) {
+	public String deleteStudent(@RequestParam("scholarNumber") String rollNo) {
 		studentsDao.deleteStudent(rollNo);
 		return "redirect:/studentsList";
 	}
@@ -326,9 +314,13 @@ public class StudentController {
 			@RequestParam("studentPic") MultipartFile  studentPic, @RequestParam("samagraPic") MultipartFile  samagraPic,
 			@RequestParam("castPic") MultipartFile  castPic, @RequestParam("tcPic") MultipartFile  tcPic,
 			@RequestParam("migrationPic") MultipartFile  migrationPic) throws IOException {
-		System.out.println(dto);
+	
+		System.out.println(dto.getStuClass()+" "+dto.getAddress());
+		
 		String stuClass = dto.getStuClass();
 		dto.setFees(studentsDao.getStudentFees(stuClass));
+		System.out.println("Fees set: Class is : "+ dto.getStuClass() +" fees is "+ dto.getFees());
+	
 		
 		dto.setAadharPhoto(Base64.getEncoder().encodeToString(aadharPic.getBytes()));
 		dto.setStudentPhoto(Base64.getEncoder().encodeToString(studentPic.getBytes()));
@@ -337,18 +329,18 @@ public class StudentController {
 		dto.setTcPhoto(Base64.getEncoder().encodeToString(tcPic.getBytes()));
 		dto.setMigrationPhoto(Base64.getEncoder().encodeToString(migrationPic.getBytes()));
 		
-		
-		
-		if (studentsDao.getListOfScholarNumbers().contains(dto.getScholarNumber())) {
-			model.addAttribute("msg", "Student Failed to Enrolled !! Scholar Number Already Exist");
-			return "admissionForm";
-		}
-		
+	
 		if (dto.getId() == 0) {
 			System.out.println("saved method called");
+
+			if (studentsDao.getListOfScholarNumbers().contains(dto.getScholarNumber())) {
+				model.addAttribute("msg", "Student Failed to Enrolled !! Scholar Number Already Exist");
+				return "admissionForm";
+			}
 		studentsDao.saveStudents(dto);
 		} else {
 			System.out.println("update method called");
+			
 			studentsDao.updateStudent(dto);
 		}
 		
@@ -370,16 +362,9 @@ public class StudentController {
 		
 		
 		model.addAttribute("msg", "Student Enrolled Successfully");
-		return "studentsList";
+		return "redirect:/studentsList";
 		
 	}
-	@ResponseBody
-	@RequestMapping("/stulist")
-	public String stuList() {
-
-		return "Student List";
-	}
-
 	
 	@RequestMapping("/customlogin")
 	public String customLogin() {

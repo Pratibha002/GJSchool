@@ -6,12 +6,22 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
-        integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
-        crossorigin="anonymous"></script>
+         <meta name = "viewport" content = "width=device-width, initial-scale = 1">
+         
+            <link rel = "stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+      <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src = "https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+         
+   
+   
+    
+      
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">   
+
+      <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src = "https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+      
+      
 <title>Students List</title>
 
 	 <script type="text/javascript">
@@ -49,50 +59,45 @@
 
 </head>
 <body>
-
-<center> 
+<jsp:include page="../../verMenu.jsp"></jsp:include>
 <br> 
-<hr>
+
 <font color="green"> </font><h1>${msg }</h1> </font>
 <hr> 
-		<form action="searchStudents" onsubmit="return validateform()" >
+<CENTER>
 
+	<h3> Students Details</h3>
+
+		<form action="searchStudents" onsubmit="return validateform()" >
+			<label> Branch :</label>
 			<select name="branch">
 				<option value="Gyan Jyoti Public School">Gyan Jyoti Public School</option>
 				<option value="Gyan Jyoti International School">Gyan Jyoti International School
 				</option>
 			</select>
-		<br> 
-		
 					<div class="form-group col-md-6">
-					<label for="form:inputState">Session</label> <select name="session" >
+					<label for="form:inputState">Session :</label> <select name="session" >
 						<j:forEach var="session" items="${session}">
 					<option value="${session}">${session}</option>
 					</j:forEach>
 					</select>
 				</div>
-		<Br>
-		
-		
-		
-		<label>Classes : </label> 
+				
+		<label>Class : </label> 
 			<select name="classes">
 				<j:forEach var="classe" items="${classes}">
 					<option value="${classe.classes}">${classe.classes}</option>
 				</j:forEach>
 			</select>
-			
 		<br>	
-			<label>Scholar Number / Name : </label> <input type="text" id="search" name="searchValue"><br>
+			<label>Scholar No/Name : </label> <input type="text" id="search" name="searchValue"><br>
 			
-		<!-- 	<label>Name : </label> <input type="text" name="name"> --><br>
 			<input type="submit" value="submit">
 		
 		</form>
-
+</CENTER>
 
 		<br>
-		<hr>
 
 
 		</form>
@@ -100,35 +105,35 @@
 		<!-- Model attritube: students -->
 		<!-- Iterating using JSTL -->
 		<!--Internally gettterMethod() is getting called : stu.id  -->
-		<table border="">
+		<table class = "table table-hover table-bordered ">
+		<thead>
 			<tr>
-				<td>S.No</td>
-				<td>Scholar No</td>
-				<td> Class </td>
-				<td> Name </td>
-				<td>Father Name</td>
-				<td>Classes</td>
-				<td>Contact</td>
-				<td> DOB </td>
-				<td> Category </td>
-				<td> Bank </td>
-				<td> Account No </td>
-				<td> IFSC </td>
-				<td> Aadhar </td>
-				<td> Samagra </td>
-				<td> Branch </td>
-				<td> Session </td>
-				<td> Student Photo </td>
-				<td>Fees Details</td>
-				<td>Remainin Fees</td>
+				<th scope="col">S.No</th>
+				<th >Scholar No</th>
+				<th scope="col"> Name </th>
+				<th scope="col">Father </th>
+				<th scope="col">Classes</th>
+				<th scope="col">Contact</th>
+				<th scope="col"> DOB </th>
+				<th scope="col"> Category </th>
+				<th scope="col"> Bank </th>
+				<th scope="col"> Account No </th>
+				<th scope="col"> IFSC </th>
+				<th scope="col"> Aadhar </th>
+				<th scope="col"> Samagra </th>
+				<th scope="col"> Branch </th>
+				<th scope="col"> Session </th>
+				<th scope="col"> Student Photo </th>
+				<th scope="col">Fees Details</th>
+				<th scope="col">Remainin Fees</th>
+				<th scope="col"> Action </th>
 				
 			</tr>
-
+</thead>
 			<j:forEach var="stu" items="${studentsList}">
 				<tr>
 					<td>${stu.id}</td>
 					<td>${stu.scholarNumber}</td>
-					<td>${stu.stuClass} </td>
 					<td>${stu.name}</td>
 					<td>${stu.fName}</td>
 					<td>${stu.stuClass}</td>
@@ -147,28 +152,24 @@
 					<td><j:forEach var="fees" items="${remFeesList}">
 							<j:if test="${stu.scholarNumber==fees.scholarNumberOrName}">${stu.fees-fees.amount }</j:if>
 						</j:forEach> </td>
-					<td><a href="admissionForm"> Add</a></td>
-					<td><a href="updateStudents?userId=${stu.id}"> update</a></td>
-					<td><a href="deleteStudent?rollNo=${stu.scholarNumber}"
-						onclick="if (!(confirm('Are you sure you want to Delete'))) return false">
-							Delete</a></td>
-					<td><a href="feesSummary?rollNo=${stu.scholarNumber}"">Details</a></td>
+					<td>
+					<a href="updateStudents?userId=${stu.id}"> <i class="fas fa-edit"></i></a>
+					<a href="deleteStudent?scholarNumber=${stu.scholarNumber}" onclick="if (!(confirm('Are you sure you want to Delete'))) return false">
+							<i class="fas fa-trash"></i></a></td>
 					
 				</tr>
 			</j:forEach>
 		</table>
 		<br>
-
+<center>
 		<p>Total Fees : ${totalFees}</p>
 		<br>
 		<p>Total Remaining Fees :${totalFees-totalRemFees}</p>
 		<br>
-		
-		
+		</center>
+	
 
-		
-		
-</center>	
+
 
 </body>
 </html>

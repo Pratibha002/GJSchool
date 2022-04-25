@@ -12,7 +12,14 @@ public class FeesAmountDto {
 	public String amount;
 	public String date;
 	
+	public int fees;
 	
+	public int getFees() {
+		return fees;
+	}
+	public void setFees(int fees) {
+		this.fees = fees;
+	}
 	public String paymentMode;
 	public String senderBankName;
 	public String chequeNo;
