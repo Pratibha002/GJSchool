@@ -52,7 +52,7 @@ public class AdminController {
 	public String addSession(@RequestParam("sessionStart") Date sessionStart, @RequestParam("sessionEnd") Date sessionEnd) {
 	List<String> sessionList = 	adminDao.listSession();
 	
-	SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy"); 
+	SimpleDateFormat df = new SimpleDateFormat("yyyy"); 
 	System.out.println("start date "+df.format(sessionStart));
 	
 	if(!sessionList.contains(sessionStart+"-"+sessionEnd)) {

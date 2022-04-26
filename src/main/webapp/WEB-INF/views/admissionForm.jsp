@@ -87,9 +87,6 @@
                 var dob = document.getElementById("dob");
                 var admissionDate = document.getElementById("admissionDate");
                 
-
-                
-                
                 if(name.value.length<=0 || !isNaN(name.value) || name.value.length>20 ) {   
                 	document.getElementById("name").style="background-color: #FBE3E4; border-color: Red";
                         valid = false;
@@ -111,8 +108,7 @@
             	}else{
             		document.getElementById("fName").style="background-color: white; border-color: Black";
             	}
-                
-                
+
                 if(mName.value.length<=0 || mName.value.length>20 || !isNaN(mName.value) ) {
                 	document.getElementById("mName").style="background-color: #FBE3E4; border-color: Red";
                 valid = false;
@@ -143,8 +139,6 @@
             		document.getElementById("dob").style="background-color: white; border-color: Black";
             	}
                 
-               
-                
                 if(birthPlace.value.length<=0 || birthPlace.value.length>30 || !isNaN(birthPlace.value) ) {
                 	document.getElementById("birthPlace").style="background-color: #FBE3E4; border-color: Red";
                 valid = false;
@@ -173,9 +167,7 @@
             	}else{
             		document.getElementById("lastSchoolStudied").style="background-color: white; border-color: Black";
             	}
-                
-                
-                
+
                 if(contact.value.length<=0 || isNaN(contact.value) || contact.value.length<10 || contact.value.length>10 ) {
                 	document.getElementById("contact").style="background-color: #FBE3E4; border-color: Red";
                 valid = false;
@@ -220,9 +212,7 @@
             	}else{
             		document.getElementById("accNo").style="background-color: white; border-color: Black";
             	}
-                
-                
-                
+	
                 if(ifsc.value.length<=0 || ifsc.value.length>15  ) {
                 	document.getElementById("ifsc").style="background-color: #FBE3E4; border-color: Red";
                 valid = false;
@@ -256,7 +246,7 @@
             	}else{
             		document.getElementById("city").style="background-color: white; border-color: Black";
             	}
-                
+
                 if(state.value.length<=0 || state.value.length>40 || !isNaN(state.value) ) {
                 	document.getElementById("state").style="background-color: #FBE3E4; border-color: Red";
                 valid = false;
@@ -264,8 +254,7 @@
             		document.getElementById("state").style="background-color: white; border-color: Black";
             	}
 
-                var allowedExtensions =  /(\.jpg|\.jpeg|\.png|\.gif)$/i; 
-             
+               var allowedExtensions =  /(\.jpg|\.jpeg|\.png|\.gif)$/i; 
                 
                 var aadharPic =  document.getElementById('aadharPic');  
                 var studentPic =  document.getElementById('studentPic');
@@ -280,8 +269,13 @@
                 var castPath = samagraPic.value;
                 var tcPath = tcPic.value;
                 var migrationPath = migrationPic.value;
-                       
+ 
+
                 
+                if(aadharPath.size>100){
+                	alert("Size exeedes");
+                	valid=false;
+                }
     	
                 if(aadharPath <=0 ){
                 	document.getElementById("aadharPic").style="background-color: Black; border-color: Black";
@@ -292,7 +286,7 @@
 //                                alert('Invalid file type or No File Selected');
                                 fileInput.value = '';
                                 valid = false;
-                            } 
+                 } 
                 
                 if(studentPath <=0 ){
                 	document.getElementById("studentPic").style="background-color: Black; border-color: Black";
@@ -303,7 +297,7 @@
 //                                alert('Invalid file type or No File Selected');
                                 fileInput.value = '';
                                 valid = false;
-                            } 
+                 } 
                 
                 
                 
@@ -361,11 +355,8 @@
               if(!valid){
             	  alert("Please Enter Correct Details in Red Colored Fields");
               } 
-        
                 return valid;
-            };
-
-            
+            };           
         </script>
 
 
@@ -373,7 +364,7 @@
 </head>
 <body>
 <jsp:include page="../../verMenu.jsp"></jsp:include>
-<form:form action="saveAdmissison" modelAttribute="admissionDto" method="post" enctype="multipart/form-data" onsubmit="return !validateform()">
+<form:form action="saveAdmissison" modelAttribute="admissionDto" method="post" enctype="multipart/form-data" onsubmit="return validateform()">
     
 			<form:input type="hidden" path="id" />
     
@@ -579,6 +570,23 @@
  
                          </div>
       
+ <div class="row">
+                            <div class="col-md-6 mb-4 pb-2">
+        
+                              <div class="form-outline">
+                                <label class="form-label" for="form3Examplev2">Gender :</label>
+                                
+					<form:select path="gender">
+					<option value="Male">Male</option>
+					<option value="Female">FeMale</option>
+					</form:select>                                       
+                               </div>
+        
+                            </div>
+ 
+                          
+ 
+                         </div>
       
       
                       </div>
@@ -754,7 +762,7 @@
                         </div>
                         
       
-                        <input type="submit" class="btn btn-light btn-lg" data-mdb-ripple-color="dark" value="Admission Confirmm">
+                        <input type="submit" class="btn btn-light btn-lg" data-mdb-ripple-color="dark" value="Admission Confirm">
       	<br> 
 		      
                       </div>

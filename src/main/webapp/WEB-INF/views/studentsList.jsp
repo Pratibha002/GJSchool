@@ -119,6 +119,7 @@
 				<th scope="col">S.No</th>
 				<th >Scholar No</th>
 				<th scope="col"> Name </th>
+				<th scope="col"> Gender </th>
 				<th scope="col">Father </th>
 				<th scope="col">Classes</th>
 				<th scope="col">Contact</th>
@@ -143,6 +144,7 @@
 					<td>${stu.id}</td>
 					<td>${stu.scholarNumber}</td>
 					<td>${stu.name}</td>
+					<td>${stu.gender}</td>
 					<td>${stu.fName}</td>
 					<td>${stu.stuClass}</td>
 					<td>${stu.contact}</td>
