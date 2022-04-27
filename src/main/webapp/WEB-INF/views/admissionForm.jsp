@@ -270,12 +270,25 @@
                 var tcPath = tcPic.value;
                 var migrationPath = migrationPic.value;
  
-
+/*
+                const fi =  document.getElementById('aadharPic');  
+                if(fi.files.length > 0) {
+                    
+                	for (const i = 0; i <= fi.files.length - 1; i++) {
+                		
+                		const fsize = fi.files.item(i).size;
+                        const file = Math.round((fsize / 1024));
+                        // The size of the file.
+                        if (file >= 100) { // Size in KB
+                        	 
+                            alert("Aadhar Pic is too Big, Please select a file less than 100KB");
+                            valid = false;
+                        } 	
+                	}	
+                }  
                 
-                if(aadharPath.size>100){
-                	alert("Size exeedes");
-                	valid=false;
-                }
+               
+  */              
     	
                 if(aadharPath <=0 ){
                 	document.getElementById("aadharPic").style="background-color: Black; border-color: Black";
