@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configurable
@@ -50,7 +51,7 @@ public class SchoolConfig {
 	    multipartResolver.setMaxUploadSize(1000000);
 	    return multipartResolver;
 	}
-
+	
 	
 	
 	@Bean

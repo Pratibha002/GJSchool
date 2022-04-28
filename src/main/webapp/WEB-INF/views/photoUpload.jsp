@@ -1,3 +1,4 @@
+<%@ taglib prefix="j" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="j" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -21,6 +22,7 @@
 <br> 
 ${aman} 
 <img id="ItemPreview" src="data:image/jpeg;base64,${pic}">
+
 
 </center>
 </body>

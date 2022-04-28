@@ -1,7 +1,5 @@
 package com.school.config;
 
-import java.net.http.HttpConnectTimeoutException;
-
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
