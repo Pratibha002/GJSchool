@@ -198,6 +198,10 @@ public class StudentsDaoImpl implements StudentsDao {
 	public void deleteStudent(String rollNo) {
 		String sql = "delete  from students where scholarNumber=?";
 		jdbcTemplate.update(sql,rollNo);
+		
+		String sql1 = "delete  from feestransaction where scholarNumber=?";
+		jdbcTemplate.update(sql1,rollNo);
+		
 		System.out.println("Student deleted");
 	}
 
