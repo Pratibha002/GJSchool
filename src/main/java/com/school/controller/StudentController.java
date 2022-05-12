@@ -45,7 +45,9 @@ public class StudentController {
 
 	@Autowired
 	public AdminDao adminDao;
-
+	
+	
+	
 	@RequestMapping("/form")
 	public String form( Model model, AdmissionDto dto ) {
 		List<FeesClassesDto> classesList = adminDao.listClasses();
@@ -251,14 +253,31 @@ public class StudentController {
 		return "studentsList";
 	}
 	
-	
 	@RequestMapping("/studentsList")
-	public String studentsList(Model model) {
+	public String studentsList(Model model, HttpServletRequest request) {
+		String pageNo= request.getParameter("pageid");
+		int pageid;
+		if(pageNo==null) {
+			pageid =1;
+		}else {
+		 pageid = Integer.parseInt(pageNo);
+		}
+		System.out.println("page no is "+pageid);
+		int total = 2;
+        if(pageid==1){}    
+        else{    
+            pageid=(pageid-1)*total+1;    
+        }    
+		
 		List<FeesClassesDto> classesList = adminDao.listClasses();
-		List<AdmissionDto> studentsList = studentsDao.listStudents();
 		List<FeesAmountDto> remFeesList = studentsDao.remainingFees();
 		
+		//List<AdmissionDto> studentsList = studentsDao.listStudents();
+        List<AdmissionDto> studentsList = studentsDao.getStudentsByPage(pageid,total);    
+		
 		List<String> scholarList = 	studentsDao.getListOfScholarNumbers();
+		
+		
 		
 		
 		int totalFees =  studentsDao.totalFees();

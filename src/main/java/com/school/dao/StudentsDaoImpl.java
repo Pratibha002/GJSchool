@@ -41,6 +41,20 @@ public class StudentsDaoImpl implements StudentsDao {
 		return jdbcTemplate.queryForList(sql,String.class);  
 	}
 	
+
+
+
+	public List<AdmissionDto> getStudentsByPage(int pageid,int total){    
+	 	String sql="select * from students limit ?,?"; 
+	  
+	    List<AdmissionDto> studentList = jdbcTemplate.query(sql,new StudentsMapper(),pageid-1,total);
+	    return studentList;	    		
+	}    
+	
+	
+	
+	
+	
 	public int getStudentFees(String stuClass) {
 		int fees = 0;
 		System.out.println("classes in dao "+stuClass);
