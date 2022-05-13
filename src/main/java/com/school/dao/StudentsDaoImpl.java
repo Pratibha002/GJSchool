@@ -124,9 +124,9 @@ public class StudentsDaoImpl implements StudentsDao {
 	}
 	
 	
-	public List<AdmissionDto> searchStudent( String stuClasses,String branch,String session) {
-		String sql = "select * from students where stuClass=?  AND branch=? AND session=?";
-		List<AdmissionDto> studentList = jdbcTemplate.query(sql,new StudentsMapper(),stuClasses, branch,session);
+	public List<AdmissionDto> searchStudent( String stuClasses,String branch,String session,int pageid,int totalRecords) {
+		String sql = "select * from students where stuClass=?  AND branch=? AND session=? limit ?,?";
+		List<AdmissionDto> studentList = jdbcTemplate.query(sql,new StudentsMapper(),stuClasses, branch,session,pageid-1, totalRecords);
 		
 		return studentList;
 	}

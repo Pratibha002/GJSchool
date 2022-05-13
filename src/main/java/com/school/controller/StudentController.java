@@ -178,23 +178,21 @@ public class StudentController {
 	
 	@RequestMapping(value="/searchStudents")
 	public String searchByBranch(@RequestParam("branch") String branch,@RequestParam("classes") String stuClasses,
-			@RequestParam("searchValue") String searchValue, @RequestParam("session") String session,@RequestParam("recordsPerPage") String recordsPerPage, 
-			Model model, HttpServletRequest request) {
+			@RequestParam("searchValue") String searchValue, @RequestParam("session") String session, Model model, HttpServletRequest request) {
 
 		System.out.println("branch "+branch);
 		System.out.println("stu class "+stuClasses);
 		System.out.println("searchValue "+searchValue);
 		System.out.println("session  is "+session);
-		System.out.println("recordsPerPage is "+recordsPerPage);
 		
 		
 		int totalRecords;
 		int pageid;
 		
-		if(request.getParameter("recordsPerPAge")==null) {
+		if(request.getParameter("recordsPerPage")==null) {
 			totalRecords = 10;
 		}else {
-			totalRecords = Integer.parseInt(request.getParameter("recordsPerPAge"));	
+			totalRecords = Integer.parseInt(request.getParameter("recordsPerPage"));	
 		}
 		
 		
@@ -206,19 +204,23 @@ public class StudentController {
 		 pageid = Integer.parseInt(pageNo);
 		}
 		System.out.println("page no is "+pageid);
+		System.out.println("total recores"+totalRecords);
+		
 		
         if(pageid==1){}    
         else{    
              pageid=(pageid-1)*totalRecords+1;    
         }    
 
+		List<AdmissionDto> totalStudentsList = studentsDao.listStudents();
+        int totalPageCount = (totalStudentsList.size()/totalRecords)+1;
 	
 		
 		
 		String	search =searchValue.substring(0,searchValue.length()-1);
 		if(search.length()==0) {
 			System.out.println(stuClasses +" " + branch +" "+ session );
-		List<AdmissionDto> studentsList = studentsDao.searchStudent(stuClasses,branch,session);
+		List<AdmissionDto> studentsList = studentsDao.searchStudent(stuClasses,branch,session,pageid,totalRecords);
 		model.addAttribute("studentsList", studentsList);
 		}else if(search.charAt(0)==',') {
 			System.out.println("search by scholar number"+ search);
