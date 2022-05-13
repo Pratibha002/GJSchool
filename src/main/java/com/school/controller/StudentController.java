@@ -188,7 +188,7 @@ public class StudentController {
 		
 		int totalRecords;
 		int pageid;
-		
+		int totalPageCount = 1;
 		if(request.getParameter("recordsPerPage")==null) {
 			totalRecords = 10;
 		}else {
@@ -213,25 +213,26 @@ public class StudentController {
         }    
 
 		List<AdmissionDto> totalStudentsList = studentsDao.listStudents();
-        int totalPageCount = (totalStudentsList.size()/totalRecords)+1;
-	
-		
+       	
 		
 		String	search =searchValue.substring(0,searchValue.length()-1);
 		if(search.length()==0) {
 			System.out.println(stuClasses +" " + branch +" "+ session );
 		List<AdmissionDto> studentsList = studentsDao.searchStudent(stuClasses,branch,session,pageid,totalRecords);
+		  totalPageCount = (studentsList.size()/totalRecords)+1;
 		model.addAttribute("studentsList", studentsList);
 		}else if(search.charAt(0)==',') {
 			System.out.println("search by scholar number"+ search);
 			String searchSch = search.substring(1,searchValue.length()-1);
 			List<AdmissionDto> studentsList = studentsDao.searchStudentbyScholarNumber(stuClasses,searchSch,branch,session);
 			System.out.println("list size "+ studentsList.size());
+			 totalPageCount = (studentsList.size()/totalRecords)+1;
 			model.addAttribute("studentsList", studentsList);	model.addAttribute("studentsList", studentsList);
 		}else {
 			System.out.println("search by name "+ search);
 			List<AdmissionDto> studentsList = studentsDao.searchStudentbyName(stuClasses,search,branch,session);
 			System.out.println("list size "+ studentsList.size());
+			 totalPageCount = (studentsList.size()/totalRecords)+1;
 			model.addAttribute("studentsList", studentsList);	model.addAttribute("studentsList", studentsList);		}
 		
 		
@@ -242,13 +243,22 @@ public class StudentController {
 		
 		List<FeesClassesDto> classesList = adminDao.listClasses();
 		List<String> sessionList = adminDao.listSession();
+				
+List<String> scholarList = 	studentsDao.getListOfScholarNumbers();
 		
-
+		
 		model.addAttribute("session", sessionList);
-		model.addAttribute("classes", classesList);		
+		model.addAttribute("classes", classesList);
 		model.addAttribute("remFeesList",remFeesList);
 		model.addAttribute("totalFees", totalFees);
 		model.addAttribute("totalRemFees", totalRemFees);
+		model.addAttribute("totalPageCount",totalPageCount);
+		model.addAttribute("pageid",pageid);
+		
+		
+		
+		
+		
 		return "studentsList";
 	}
 	
