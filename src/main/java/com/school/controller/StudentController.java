@@ -178,12 +178,42 @@ public class StudentController {
 	
 	@RequestMapping(value="/searchStudents")
 	public String searchByBranch(@RequestParam("branch") String branch,@RequestParam("classes") String stuClasses,
-			@RequestParam("searchValue") String searchValue, @RequestParam("session") String session, Model model) {
+			@RequestParam("searchValue") String searchValue, @RequestParam("session") String session,@RequestParam("recordsPerPage") String recordsPerPage, 
+			Model model, HttpServletRequest request) {
 
 		System.out.println("branch "+branch);
 		System.out.println("stu class "+stuClasses);
 		System.out.println("searchValue "+searchValue);
 		System.out.println("session  is "+session);
+		System.out.println("recordsPerPage is "+recordsPerPage);
+		
+		
+		int totalRecords;
+		int pageid;
+		
+		if(request.getParameter("recordsPerPAge")==null) {
+			totalRecords = 10;
+		}else {
+			totalRecords = Integer.parseInt(request.getParameter("recordsPerPAge"));	
+		}
+		
+		
+		String pageNo= request.getParameter("currentPage");
+		
+		if(pageNo==null) {
+			pageid =1;
+		}else {
+		 pageid = Integer.parseInt(pageNo);
+		}
+		System.out.println("page no is "+pageid);
+		
+        if(pageid==1){}    
+        else{    
+             pageid=(pageid-1)*totalRecords+1;    
+        }    
+
+	
+		
 		
 		String	search =searchValue.substring(0,searchValue.length()-1);
 		if(search.length()==0) {
@@ -255,41 +285,53 @@ public class StudentController {
 	
 	@RequestMapping("/studentsList")
 	public String studentsList(Model model, HttpServletRequest request) {
-		String pageNo= request.getParameter("pageid");
+		int totalRecords;
 		int pageid;
+		
+		if(request.getParameter("recordsPerPAge")==null) {
+			totalRecords = 10;
+		}else {
+			totalRecords = Integer.parseInt(request.getParameter("recordsPerPAge"));	
+		}
+		
+		
+		String pageNo= request.getParameter("currentPage");
+		
 		if(pageNo==null) {
 			pageid =1;
 		}else {
 		 pageid = Integer.parseInt(pageNo);
 		}
 		System.out.println("page no is "+pageid);
-		int total = 2;
+		
         if(pageid==1){}    
         else{    
-            pageid=(pageid-1)*total+1;    
+             pageid=(pageid-1)*totalRecords+1;    
         }    
 		
 		List<FeesClassesDto> classesList = adminDao.listClasses();
 		List<FeesAmountDto> remFeesList = studentsDao.remainingFees();
 		
-		//List<AdmissionDto> studentsList = studentsDao.listStudents();
-        List<AdmissionDto> studentsList = studentsDao.getStudentsByPage(pageid,total);    
+		List<AdmissionDto> totalStudentsList = studentsDao.listStudents();
+        int totalPageCount = (totalStudentsList.size()/totalRecords)+1;
+		List<AdmissionDto> studentsList = studentsDao.getStudentsByPage(pageid,totalRecords);    
 		
 		List<String> scholarList = 	studentsDao.getListOfScholarNumbers();
-		
-		
-		
 		
 		int totalFees =  studentsDao.totalFees();
 		int totalRemFees = studentsDao.totalRemainingFees();
 		List<String> session = adminDao.listSession();
+		
 		model.addAttribute("session", session);
 		model.addAttribute("classes", classesList);
 		model.addAttribute("studentsList", studentsList);
 		model.addAttribute("remFeesList",remFeesList);
 		model.addAttribute("totalFees", totalFees);
 		model.addAttribute("totalRemFees", totalRemFees);
+		model.addAttribute("totalPageCount",totalPageCount);
+		model.addAttribute("pageid",pageid);
 		
+		System.out.println("pageId : "+pageid + "total page count :"+totalPageCount);
 		return "studentsList";
 	}
 	

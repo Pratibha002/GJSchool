@@ -99,6 +99,14 @@
 		<label> Scholar Number</label><input type="text" id="search" name="searchValue"> 
 		</div>
 		
+  <br> Show
+   <select name="recordsPerPage">
+  <option value="2">20</option>
+  <option value="40">40</option>
+  <option value="60">60</option>
+  <option value="80">80</option>
+  <option value="100">100</option>
+  </select> entries
 			<br>
 			<input type="submit" value="submit">
 		
@@ -172,6 +180,30 @@
 		</table>
 		<br>
 <center>
+
+  
+  <%--For displaying Page numbers. The when condition does not display
+              a link for the current page--%>
+
+<table border="1" cellpadding="5" cellspacing="5">
+      <tr>
+          <j:forEach begin="1" end="${totalPageCount}" var="i">
+              <j:choose>
+                  <j:when test="${currentPage eq i}">
+                      <td>${i}</td>
+                  </j:when>
+                  <j:otherwise>
+                      <td><a href="studentsList?currentPage=${i}">${i}</a></td>
+                  </j:otherwise>
+              </j:choose>
+          </j:forEach>
+      </tr>
+  </table>  
+  
+
+  
+  
+   
 		<p>Total Fees : ${totalFees}</p>
 		<br>
 		<p>Total Remaining Fees :${totalFees-totalRemFees}</p>

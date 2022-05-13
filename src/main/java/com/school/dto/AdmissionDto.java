@@ -43,8 +43,7 @@ public class AdmissionDto {
 	public String tcPhoto;
 	public String migrationPhoto;
 
-
-
+	
 public String getStudentPhoto() {
 	return studentPhoto;
 }
