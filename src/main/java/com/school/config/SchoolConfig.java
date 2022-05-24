@@ -48,7 +48,8 @@ public class SchoolConfig {
 	@Bean(name = "multipartResolver")
 	public CommonsMultipartResolver multipartResolver() {
 	    CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-	    multipartResolver.setMaxUploadSize(1000000);
+	   // size in bytes : - 2 MB file size
+	    multipartResolver.setMaxUploadSize(2097152);
 	    return multipartResolver;
 	}
 	

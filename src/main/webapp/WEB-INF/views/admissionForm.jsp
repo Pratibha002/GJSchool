@@ -270,25 +270,6 @@
                 var tcPath = tcPic.value;
                 var migrationPath = migrationPic.value;
  
-/*
-                const fi =  document.getElementById('aadharPic');  
-                if(fi.files.length > 0) {
-                    
-                	for (const i = 0; i <= fi.files.length - 1; i++) {
-                		
-                		const fsize = fi.files.item(i).size;
-                        const file = Math.round((fsize / 1024));
-                        // The size of the file.
-                        if (file >= 100) { // Size in KB
-                        	 
-                            alert("Aadhar Pic is too Big, Please select a file less than 100KB");
-                            valid = false;
-                        } 	
-                	}	
-                }  
-                
-               
-  */              
     	
                 if(aadharPath <=0 ){
                 	document.getElementById("aadharPic").style="background-color: Black; border-color: Black";
@@ -299,6 +280,22 @@
 //                                alert('Invalid file type or No File Selected');
                                 fileInput.value = '';
                                 valid = false;
+                 }else{
+                    const fi =  document.getElementById('aadharPic');  
+                     if(fi.files.length > 0) {
+                         
+                     	for (const i = 0; i <1 ; i++) {
+                     		
+                     		const fsize = fi.files.item(i).size;
+                             const file = Math.round((fsize / 1024));
+                             // The size of the file.
+                             if (file > 2048) { // Size in KB        	 
+                                 alert("Aadhar Pic is too Big, Please select a file less than 2MB");
+                                 valid = false;
+                             } 	
+                             break;
+                     	}	
+                     }  
                  } 
                 
                 if(studentPath <=0 ){
@@ -310,6 +307,22 @@
 //                                alert('Invalid file type or No File Selected');
                                 fileInput.value = '';
                                 valid = false;
+                 }else{
+                    const fi =  document.getElementById('studentPic');  
+                     if(fi.files.length > 0) {
+                         
+                     	for (const i = 0; i <1 ; i++) {
+                     		
+                     		const fsize = fi.files.item(i).size;
+                             const file = Math.round((fsize / 1024));
+                             // The size of the file.
+                             if (file > 2048) { // Size in KB        	 
+                                 alert("Student Pic is too Big, Please select a file less than 2MB");
+                                 valid = false;
+                             } 	
+                             break;
+                     	}	
+                     }  
                  } 
                 
                 
@@ -323,7 +336,23 @@
 //                                alert('Invalid file type or No File Selected');
                                 fileInput.value = '';
                                 valid = false;
-                            } 
+                    } else{
+                        const fi =  document.getElementById('samagraPic');  
+                        if(fi.files.length > 0) {
+                            
+                        	for (const i = 0; i <1 ; i++) {
+                        		
+                        		const fsize = fi.files.item(i).size;
+                                const file = Math.round((fsize / 1024));
+                                // The size of the file.
+                                if (file > 2048) { // Size in KB        	 
+                                    alert("Samagra Pic is too Big, Please select a file less than 2MB");
+                                    valid = false;
+                                } 	
+                                break;
+                        	}	
+                        }  
+                    } 
                 
                 
                 if(castPath <=0 ){
@@ -335,6 +364,22 @@
 //                                alert('Invalid file type or No File Selected');
                                 fileInput.value = '';
                                 valid = false;
+                            } else{
+                                const fi =  document.getElementById('castPic');  
+                                if(fi.files.length > 0) {
+                                    
+                                	for (const i = 0; i <1 ; i++) {
+                                		
+                                		const fsize = fi.files.item(i).size;
+                                        const file = Math.round((fsize / 1024));
+                                        // The size of the file.
+                                        if (file > 2048) { // Size in KB        	 
+                                            alert("Cast Pic is too Big, Please select a file less than 2MB");
+                                            valid = false;
+                                        } 	
+                                        break;
+                                	}	
+                                }  
                             } 
                 
                 
@@ -348,6 +393,22 @@
 //                                alert('Invalid file type or No File Selected');
                                 fileInput.value = '';
                                 valid = false;
+                            } else{
+                                const fi =  document.getElementById('tcPic');  
+                                if(fi.files.length > 0) {
+                                    
+                                	for (const i = 0; i <1 ; i++) {
+                                		
+                                		const fsize = fi.files.item(i).size;
+                                        const file = Math.round((fsize / 1024));
+                                        // The size of the file.
+                                        if (file > 2048) { // Size in KB        	 
+                                            alert("TC Pic is too Big, Please select a file less than 2MB");
+                                            valid = false;
+                                        } 	
+                                        break;
+                                	}	
+                                }  
                             } 
  
 
@@ -360,6 +421,22 @@
 //                                alert('Invalid file type or No File Selected');
                                 fileInput.value = '';
                                 valid = false;
+                            } else{
+                                const fi =  document.getElementById('migrationPic');  
+                                if(fi.files.length > 0) {
+                                    
+                                	for (const i = 0; i <1 ; i++) {
+                                		
+                                		const fsize = fi.files.item(i).size;
+                                        const file = Math.round((fsize / 1024));
+                                        // The size of the file.
+                                        if (file > 2048) { // Size in KB        	 
+                                            alert("Migration Pic is too Big, Please select a file less than 2MB");
+                                            valid = false;
+                                        } 	
+                                        break;
+                                	}	
+                                }  
                             } 
  
                 
@@ -370,6 +447,11 @@
               } 
                 return valid;
             };           
+            
+            
+          
+            
+            
         </script>
 
 
