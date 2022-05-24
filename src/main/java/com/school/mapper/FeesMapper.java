@@ -15,6 +15,7 @@ public class FeesMapper implements RowMapper<FeesAmountDto>{
 		FeesAmountDto fees= new FeesAmountDto();
 		fees.setScholarNumberOrName(rs.getString(1));
 		fees.setAmount(rs.getString(2));
+		fees.setReceiptNo(rs.getInt(3));
 		fees.setDate(rs.getString(4));
 		fees.setPaymentMode(rs.getString(5));
 		fees.setSenderBankName(rs.getString(6));

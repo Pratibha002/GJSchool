@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import java.nio.file.spi.FileSystemProvider;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -144,6 +145,35 @@ public class StudentController {
 			model.addAttribute("remFees", remFees);
 			return "feesSummary";
 	}
+	
+	
+	@RequestMapping("/feesReport")
+	public String feesReport() {
+			return "feesReport";
+	}
+	
+	@RequestMapping("/feesReportGenerate")
+	public String feesReportGenerate(Model model, @RequestParam("startDate") Date startDate,@RequestParam("endDate") Date endDate ) {
+			int depositedFees = 0;
+		System.out.println(startDate +" "+ endDate);
+		
+		List<FeesAmountDto> feesDto =	feesDao.feesSummaryReport(startDate, endDate);
+		List<Integer> amountList= feesDao.feesSummaryReportAmount(startDate, endDate);
+		List<AdmissionDto> totalStudentsList = studentsDao.listStudents();
+		
+				for(Integer a:amountList) {
+					depositedFees +=a;
+				}
+				
+				
+		model.addAttribute("feesDto", feesDto);
+		model.addAttribute("depositedFees", depositedFees);
+		model.addAttribute("stuDto",totalStudentsList);
+		
+		return "feesReport";
+	}
+	
+	
 	
 	
 		

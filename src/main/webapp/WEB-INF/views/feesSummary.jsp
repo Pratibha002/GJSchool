@@ -124,6 +124,7 @@
 				<th>Name</th>
 				<th>Class</th>
 				<th>Scholar Number</th>
+				<th>Receipt No</th>
 				<th>Amount</th>
 				<th>Date</th>
 				<th>Payment Mode </th>
@@ -141,6 +142,7 @@
 					<td>${stuDto.name}</td>
 					<td>${stuDto.stuClass}</td>
 					<td>${fees.scholarNumberOrName}</td>
+					<td> ${fees.receiptNo}</td>
 					<td>${fees.amount}</td>
 					<td>${fees.date}</td>
 					

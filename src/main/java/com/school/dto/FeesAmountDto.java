@@ -29,8 +29,16 @@ public class FeesAmountDto {
 	public String remark;
 	
 	
+	public int receiptNo;
 	
 	
+	
+	public void setReceiptNo(int receiptNo) {
+		this.receiptNo = receiptNo;
+	}
+	public int getReceiptNo() {
+		return receiptNo;
+	}
 	
 	public String getPaymentMode() {
 		return paymentMode;

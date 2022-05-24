@@ -29,6 +29,8 @@
 <br> 
 <a href="adLogin">Administrative login</a>
 <br> 
+<a href="feesReport">Fees Report</a>
+<br> 
 
 
 
