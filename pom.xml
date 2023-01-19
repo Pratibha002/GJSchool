@@ -19,7 +19,7 @@
 		<spring-webmvc>5.2.6.RELEASE </spring-webmvc>
 		<spring-security>5.3.3.RELEASE</spring-security>
 		
-		<mysql-connector> 5.1.6 </mysql-connector>
+		<mysql-connector> 8.0.31 </mysql-connector>
 		<javax.servlet>4.0.1</javax.servlet>
 		<jstl>1.2</jstl>
 		

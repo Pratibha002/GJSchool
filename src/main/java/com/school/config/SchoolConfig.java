@@ -32,9 +32,9 @@ public class SchoolConfig {
 	@Bean
 	public DataSource datasource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+		dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
 		dataSource.setUsername("root");
-		dataSource.setPassword("root");
+		dataSource.setPassword("rootroot");
 		dataSource.setUrl("jdbc:mysql://localhost:3306/gjschool");
 		return dataSource;
 	}
