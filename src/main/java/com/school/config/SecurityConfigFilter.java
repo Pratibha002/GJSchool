@@ -12,7 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 //This is going to create filter chain
 
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 public class SecurityConfigFilter extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -21,12 +21,12 @@ public class SecurityConfigFilter extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-	/*-	 In memory authentication
+	//	 In memory authentication		
 		auth.inMemoryAuthentication().withUser("Aman").password("tomar").roles("admin").and().withUser("Kavyansh")
 				.password("jain").roles("admin");
-*/
+
 		//JDBC authentication
-		auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(NoOpPasswordEncoder.getInstance());
+	//	auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(NoOpPasswordEncoder.getInstance());
 	}
 
 	// ByDefault formLogin and Basic http login are activated
