@@ -459,7 +459,7 @@
 </head>
 <body>
 <jsp:include page="../../verMenu.jsp"></jsp:include>
-<form:form action="saveAdmissison" modelAttribute="admissionDto" method="post" enctype="multipart/form-data" onsubmit="return validateform()">
+<form:form action="saveAdmissison" modelAttribute="admissionDto" method="post" enctype="multipart/form-data" onsubmit=""> --return !validateform()
     
 			<form:input type="hidden" path="id" />
     
@@ -536,7 +536,7 @@
       
                             <div class="form-outline">
                               <label class="form-label" for="form3Examplev2">Father's Education</label>
-                                <form:input type="text" id="fEducation" path="" placeholder="Father's Education" class="form-control form-control-lg"/>
+                                <form:input type="text" id="fEducation" path="fEducation" placeholder="Father's Education" class="form-control form-control-lg"/>
                             </div>
       
                           </div>
@@ -544,7 +544,7 @@
       
                             <div class="form-outline">
                          	     <label class="form-label" for="form3Examplev3">Mother Education</label>
-                              <form:input type="text" id="mEducation"  path="" placeholder="Mother Education" class="form-control form-control-lg"/>
+                              <form:input type="text" id="mEducation"  path="mEducation" placeholder="Mother Education" class="form-control form-control-lg"/>
                             </div>
       
                           </div>
