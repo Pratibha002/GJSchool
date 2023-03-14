@@ -531,6 +531,24 @@
         
                             </div>
                           </div>
+                           <div class="row">
+                          <div class="col-md-6 mb-4 pb-2">
+      
+                            <div class="form-outline">
+                              <label class="form-label" for="form3Examplev2">Father's Education</label>
+                                <form:input type="text" id="fEducation" path="" placeholder="Father's Education" class="form-control form-control-lg"/>
+                            </div>
+      
+                          </div>
+                          <div class="col-md-6 mb-4 pb-2">
+      
+                            <div class="form-outline">
+                         	     <label class="form-label" for="form3Examplev3">Mother Education</label>
+                              <form:input type="text" id="mEducation"  path="" placeholder="Mother Education" class="form-control form-control-lg"/>
+                            </div>
+      
+                          </div>
+                        </div>
       
                           <div class="row">
                             <div class="col-md-6 mb-4 pb-2">
@@ -851,6 +869,41 @@
       
                             <div class="form-outline form-white">       
                           <label >Migration Photo</label> <input type="file" id="migrationPic" name="migrationPic" />
+                            </div>
+      
+                          </div>
+                        </div>
+                        
+                        
+                                                                     <div class="row">
+                          <div class="col-md-5 mb-4 pb-2">
+      
+                            <div class="form-outline form-white">
+                             <label for="form:inputEmail4">Father AadharCard</label> <input type="file" id="fatherAdharPic" name="fatherAdharPic" />
+                            </div>
+      
+                          </div>
+                          <div class="col-md-7 mb-4 pb-2">
+      
+                            <div class="form-outline form-white">       
+                          <label >Mother AadharCard</label> <input type="file" id="motherAdharPic" name="motherAdharPic" />
+                            </div>
+      
+                          </div>
+                        </div>
+                        
+                                                                     <div class="row">
+                          <div class="col-md-5 mb-4 pb-2">
+      
+                            <div class="form-outline form-white">
+                             <label for="form:inputEmail4">Birth Certification</label> <input type="file" id="BirthPic" name="BirthPic" />
+                            </div>
+      
+                          </div>
+                          <div class="col-md-7 mb-4 pb-2">
+      
+                            <div class="form-outline form-white">       
+                          
                             </div>
       
                           </div>
