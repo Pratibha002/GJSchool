@@ -91,6 +91,7 @@
                 var aadhar = document.getElementById("aadhar");
                 var dob = document.getElementById("dob");
                 var admissionDate = document.getElementById("admissionDate");
+               
                 
                 if(name.value.length<=0 || !isNaN(name.value) || name.value.length>20 ) {   
                 	document.getElementById("name").style="background-color: #FBE3E4; border-color: Red";
@@ -280,6 +281,9 @@
                 var samagraPic =  document.getElementById('castPic');
                 var tcPic =  document.getElementById('tcPic');
                 var migrationPic =  document.getElementById('migrationPic');
+                var fatherAadhar = document.getElementById("fatherAadhar");
+                var motherAadhar = document.getElementById("motherAadhar");
+                var BirthPic = document.getElementById("BirthPic")
                 
                 var aadharPath = aadharPic.value;
                 var studentPath = studentPic.value;
@@ -287,6 +291,9 @@
                 var castPath = samagraPic.value;
                 var tcPath = tcPic.value;
                 var migrationPath = migrationPic.value;
+                var fatherAadharpath = fatherAadhar.value;
+                var motherAadharpath = motherAadhar.value;
+                var BirthPicpath= BirthPic.value;
  
     	
                 if(aadharPath <=0 ){
@@ -309,6 +316,84 @@
                              // The size of the file.
                              if (file > 2048) { // Size in KB        	 
                                  alert("Aadhar Pic is too Big, Please select a file less than 2MB");
+                                 valid = false;
+                             } 	
+                             break;
+                     	}	
+                     }  
+                 } 
+                if(BirthPicpath <=0 ){
+                	document.getElementById("BirthPic").style="background-color: Black; border-color: Black";
+                //	alert("No file Selected");
+                	valid=false;
+                }else if (!allowedExtensions.exec(BirthPicpath)) {
+                	document.getElementById("BirthPic").style="background-color: Black; border-color: Black";
+//                                alert('Invalid file type or No File Selected');
+                                fileInput.value = '';
+                                valid = false;
+                 }else{
+                    const fi =  document.getElementById('BirthPic');  
+                     if(fi.files.length > 0) {
+                         
+                     	for (const i = 0; i <1 ; i++) {
+                     		
+                     		const fsize = fi.files.item(i).size;
+                             const file = Math.round((fsize / 1024));
+                             // The size of the file.
+                             if (file > 2048) { // Size in KB        	 
+                                 alert("Birth  Certificate is too Big, Please select a file less than 2MB");
+                                 valid = false;
+                             } 	
+                             break;
+                     	}	
+                     }  
+                 } 
+                if(motherAadharpath <=0 ){
+                	document.getElementById("motherAadhar").style="background-color: Black; border-color: Black";
+                //	alert("No file Selected");
+                	valid=false;
+                }else if (!allowedExtensions.exec(motherAadharpath)) {
+                	document.getElementById("motherAadhar").style="background-color: Black; border-color: Black";
+//                                alert('Invalid file type or No File Selected');
+                                fileInput.value = '';
+                                valid = false;
+                 }else{
+                    const fi =  document.getElementById('motherAadhar');  
+                     if(fi.files.length > 0) {
+                         
+                     	for (const i = 0; i <1 ; i++) {
+                     		
+                     		const fsize = fi.files.item(i).size;
+                             const file = Math.round((fsize / 1024));
+                             // The size of the file.
+                             if (file > 2048) { // Size in KB        	 
+                                 alert("Aadhar Pic is too Big, Please select a file less than 2MB");
+                                 valid = false;
+                             } 	
+                             break;
+                     	}	
+                     }  
+                 } 
+                if(fatherAadharpath <=0 ){
+                	document.getElementById("fatherAadhar").style="background-color: Black; border-color: Black";
+                //	alert("No file Selected");
+                	valid=false;
+                }else if (!allowedExtensions.exec(fatherAadharpath)) {
+                	document.getElementById("fatherAadhar").style="background-color: Black; border-color: Black";
+//                                alert('Invalid file type or No File Selected');
+                                fileInput.value = '';
+                                valid = false;
+                 }else{
+                    const fi =  document.getElementById('fatherAadhar');  
+                     if(fi.files.length > 0) {
+                         
+                     	for (const i = 0; i <1 ; i++) {
+                     		
+                     		const fsize = fi.files.item(i).size;
+                             const file = Math.round((fsize / 1024));
+                             // The size of the file.
+                             if (file > 2048) { // Size in KB        	 
+                                 alert("Father Aadhar Pic is too Big, Please select a file less than 2MB");
                                  valid = false;
                              } 	
                              break;
@@ -897,14 +982,14 @@
                           <div class="col-md-5 mb-4 pb-2">
       
                             <div class="form-outline form-white">
-                             <label for="form:inputEmail4">Father AadharCard</label> <input type="file" id="fatherAdharPic" name="fatherAdharPic" />
+                             <label for="form:inputEmail4">Father AadharCard</label> <input type="file" id="fatherAadhar" name="fatherAadhar" />
                             </div>
       
                           </div>
                           <div class="col-md-7 mb-4 pb-2">
       
                             <div class="form-outline form-white">       
-                          <label >Mother AadharCard</label> <input type="file" id="motherAdharPic" name="motherAdharPic" />
+                          <label >Mother AadharCard</label> <input type="file" id="motherAadhar" name="motherAadhar" />
                             </div>
       
                           </div>
