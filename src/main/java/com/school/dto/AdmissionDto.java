@@ -42,8 +42,17 @@ public class AdmissionDto {
 	public String castPhoto ;
 	public String tcPhoto;
 	public String migrationPhoto;
+	public String fEducation;
+	
+	
 
 	
+public String getfEducation() {
+		return fEducation;
+	}
+	public void setfEducation(String fEducation) {
+		this.fEducation = fEducation;
+	}
 public String getStudentPhoto() {
 	return studentPhoto;
 }
