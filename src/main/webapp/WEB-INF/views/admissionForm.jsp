@@ -70,6 +70,11 @@
                 var mName = document.getElementById("mName");
                 var fOccupation = document.getElementById("fOccupation");
                 var mOccupation = document.getElementById("mOccupation");
+                
+                var fEducation = document.getElementById("fEducation");
+                var mEducation = document.getElementById("mEducation");
+
+                
                 var contact = document.getElementById("contact");
                 var altContact = document.getElementById("altContact");                
                 var scholarNumber = document.getElementById("scholarNumber");
@@ -130,6 +135,19 @@
             	}else{
             		document.getElementById("mOccupation").style="background-color: white; border-color: Black";
             	}
+                if(fEducation.value.length<=0 || fEducation.value.length>20 || !isNaN(fEducation.value) ) {
+                	document.getElementById("fEducation").style="background-color: #FBE3E4; border-color: Red";
+                valid = false;
+            	}else{
+            		document.getElementById("fEducation").style="background-color: white; border-color: Black";
+            	}
+                if(mEducation.value.length<=0 || mEducation.value.length>20 || !isNaN(mEducation.value) ) {
+                	document.getElementById("mEducation").style="background-color: #FBE3E4; border-color: Red";
+                valid = false;
+            	}else{
+            		document.getElementById("mEducation").style="background-color: white; border-color: Black";
+            	}
+                
                 
                 
                 if(dob.value.length<=0 ) {
@@ -459,7 +477,7 @@
 </head>
 <body>
 <jsp:include page="../../verMenu.jsp"></jsp:include>
-<form:form action="saveAdmissison" modelAttribute="admissionDto" method="post" enctype="multipart/form-data" onsubmit=""> --return !validateform()
+<form:form action="saveAdmissison" modelAttribute="admissionDto" method="post" enctype="multipart/form-data" onsubmit="return validateform()"> --return !validateform()
     
 			<form:input type="hidden" path="id" />
     
