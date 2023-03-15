@@ -26,12 +26,15 @@ function validateform()
 	var feesAmount = document.getElementById("feesAmount");
 
 
-    if(className.value.length<=0 || !isNaN(className.value) || className.value.length>3 ) {   
+	if(className.value.length<=0  || className.value.length>10 ) {
     	document.getElementById("className").style="background-color: #FBE3E4; border-color: Red";
-            valid = false;
-        }else{
-        	document.getElementById("className").style="background-color: white; border-color: black";
-        }
+    valid = false;
+	}else{
+		document.getElementById("className").style="background-color: white; border-color: Black";
+	}
+    
+   
+   
     
     
 

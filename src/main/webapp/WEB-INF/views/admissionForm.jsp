@@ -789,24 +789,37 @@
  <div class="row">
                             <div class="col-md-6 mb-4 pb-2">
         
-                              <div class="form-outline">
+                             <div class="form-outline">
                                 <label class="form-label" for="form3Examplev2">Gender :</label>
                                 
 					<form:select path="gender">
 					<option value="Male">Male</option>
-					<option value="Female">FeMale</option>
+					<option value="Female">Female</option>
 					</form:select>                                       
                                </div>
-        
+                              
+                
                             </div>
- 
-                          
- 
-                         </div>
+                            <div class="col-md-6 mb-4 pb-2">
+        
+                              <div class="form-outline">
+                             <label class="form-label" for="form3Examplev2">Admission Type :</label>
+                          <select id="admissionType" name="admissionType" path="admissionType">
+  <option value="Regular"> Regular </option>
+  <option value="Private">Private</option>
+  <option value="Other">Other</option>
+  
+</select>
+           </div>
       
       
                       </div>
-                    </div>
+                      </div>
+                      </div>
+                      </div>
+                    
+                    
+                   
                     <div class="col-lg-6 bg-indigo text-white">
                       <div class="p-5">
                         <h3 class="fw-normal mb-5">Contact Details</h3>
@@ -843,8 +856,8 @@
                             <div class="col-md-6 mb-4 pb-2">
         
                               <div class="form-outline">
-                                <label class="form-label" for="form3Examplev3">Samagra Id</label>
-                            <form:input type="text" class="form-control form-control-lg" id="samagraId" path="samagraId" placeholder="Samagra ID "/>
+                                <label class="form-label" for="form3Examplev3">Student Samagra Id</label>
+                            <form:input type="text" class="form-control form-control-lg" id="samagraId" path="samagraId" placeholder="Student Samagra ID "/>
                               </div>
         
                             </div>

@@ -44,10 +44,17 @@ public class AdmissionDto {
 	public String migrationPhoto;
 	public String fEducation;
 	public String mEducation;
+	public String admissionType;
 	
 	
 
 	
+public String getAdmissionType() {
+		return admissionType;
+	}
+	public void setAdmissionType(String admissionType) {
+		this.admissionType = admissionType;
+	}
 public String getmEducation() {
 	
 		return mEducation;
