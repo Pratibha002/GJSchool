@@ -30,6 +30,7 @@
             		document.getElementById("sessionStart").style="background-color: white; border-color: Black";
             	}
                 
+                
 
                 if(sessionEnd.value.length<=0 ) {
                 	document.getElementById("sessionEnd").style="background-color: #FBE3E4; border-color: Red";

@@ -70,6 +70,11 @@
                 var mName = document.getElementById("mName");
                 var fOccupation = document.getElementById("fOccupation");
                 var mOccupation = document.getElementById("mOccupation");
+                
+                var fEducation = document.getElementById("fEducation");
+                var mEducation = document.getElementById("mEducation");
+
+                
                 var contact = document.getElementById("contact");
                 var altContact = document.getElementById("altContact");                
                 var scholarNumber = document.getElementById("scholarNumber");
@@ -86,6 +91,7 @@
                 var aadhar = document.getElementById("aadhar");
                 var dob = document.getElementById("dob");
                 var admissionDate = document.getElementById("admissionDate");
+               
                 
                 if(name.value.length<=0 || !isNaN(name.value) || name.value.length>20 ) {   
                 	document.getElementById("name").style="background-color: #FBE3E4; border-color: Red";
@@ -130,6 +136,19 @@
             	}else{
             		document.getElementById("mOccupation").style="background-color: white; border-color: Black";
             	}
+                if(fEducation.value.length<=0 || fEducation.value.length>20 || !isNaN(fEducation.value) ) {
+                	document.getElementById("fEducation").style="background-color: #FBE3E4; border-color: Red";
+                valid = false;
+            	}else{
+            		document.getElementById("fEducation").style="background-color: white; border-color: Black";
+            	}
+                if(mEducation.value.length<=0 || mEducation.value.length>20 || !isNaN(mEducation.value) ) {
+                	document.getElementById("mEducation").style="background-color: #FBE3E4; border-color: Red";
+                valid = false;
+            	}else{
+            		document.getElementById("mEducation").style="background-color: white; border-color: Black";
+            	}
+                
                 
                 
                 if(dob.value.length<=0 ) {
@@ -262,6 +281,9 @@
                 var samagraPic =  document.getElementById('castPic');
                 var tcPic =  document.getElementById('tcPic');
                 var migrationPic =  document.getElementById('migrationPic');
+                var fatherAadhar = document.getElementById("fatherAadhar");
+                var motherAadhar = document.getElementById("motherAadhar");
+                var BirthPic = document.getElementById("BirthPic")
                 
                 var aadharPath = aadharPic.value;
                 var studentPath = studentPic.value;
@@ -269,6 +291,9 @@
                 var castPath = samagraPic.value;
                 var tcPath = tcPic.value;
                 var migrationPath = migrationPic.value;
+                var fatherAadharpath = fatherAadhar.value;
+                var motherAadharpath = motherAadhar.value;
+                var BirthPicpath= BirthPic.value;
  
     	
                 if(aadharPath <=0 ){
@@ -291,6 +316,84 @@
                              // The size of the file.
                              if (file > 2048) { // Size in KB        	 
                                  alert("Aadhar Pic is too Big, Please select a file less than 2MB");
+                                 valid = false;
+                             } 	
+                             break;
+                     	}	
+                     }  
+                 } 
+                if(BirthPicpath <=0 ){
+                	document.getElementById("BirthPic").style="background-color: Black; border-color: Black";
+                //	alert("No file Selected");
+                	valid=false;
+                }else if (!allowedExtensions.exec(BirthPicpath)) {
+                	document.getElementById("BirthPic").style="background-color: Black; border-color: Black";
+//                                alert('Invalid file type or No File Selected');
+                                fileInput.value = '';
+                                valid = false;
+                 }else{
+                    const fi =  document.getElementById('BirthPic');  
+                     if(fi.files.length > 0) {
+                         
+                     	for (const i = 0; i <1 ; i++) {
+                     		
+                     		const fsize = fi.files.item(i).size;
+                             const file = Math.round((fsize / 1024));
+                             // The size of the file.
+                             if (file > 2048) { // Size in KB        	 
+                                 alert("Birth  Certificate is too Big, Please select a file less than 2MB");
+                                 valid = false;
+                             } 	
+                             break;
+                     	}	
+                     }  
+                 } 
+                if(motherAadharpath <=0 ){
+                	document.getElementById("motherAadhar").style="background-color: Black; border-color: Black";
+                //	alert("No file Selected");
+                	valid=false;
+                }else if (!allowedExtensions.exec(motherAadharpath)) {
+                	document.getElementById("motherAadhar").style="background-color: Black; border-color: Black";
+//                                alert('Invalid file type or No File Selected');
+                                fileInput.value = '';
+                                valid = false;
+                 }else{
+                    const fi =  document.getElementById('motherAadhar');  
+                     if(fi.files.length > 0) {
+                         
+                     	for (const i = 0; i <1 ; i++) {
+                     		
+                     		const fsize = fi.files.item(i).size;
+                             const file = Math.round((fsize / 1024));
+                             // The size of the file.
+                             if (file > 2048) { // Size in KB        	 
+                                 alert("Aadhar Pic is too Big, Please select a file less than 2MB");
+                                 valid = false;
+                             } 	
+                             break;
+                     	}	
+                     }  
+                 } 
+                if(fatherAadharpath <=0 ){
+                	document.getElementById("fatherAadhar").style="background-color: Black; border-color: Black";
+                //	alert("No file Selected");
+                	valid=false;
+                }else if (!allowedExtensions.exec(fatherAadharpath)) {
+                	document.getElementById("fatherAadhar").style="background-color: Black; border-color: Black";
+//                                alert('Invalid file type or No File Selected');
+                                fileInput.value = '';
+                                valid = false;
+                 }else{
+                    const fi =  document.getElementById('fatherAadhar');  
+                     if(fi.files.length > 0) {
+                         
+                     	for (const i = 0; i <1 ; i++) {
+                     		
+                     		const fsize = fi.files.item(i).size;
+                             const file = Math.round((fsize / 1024));
+                             // The size of the file.
+                             if (file > 2048) { // Size in KB        	 
+                                 alert("Father Aadhar Pic is too Big, Please select a file less than 2MB");
                                  valid = false;
                              } 	
                              break;
@@ -447,8 +550,159 @@
               } 
                 return valid;
             };           
-            
-            
+            FilevalidationtcPic = () => {
+                const fi = document.getElementById('tcPic');
+                // Check if any file is selected.
+                if (fi.files.length > 0) {
+                    for (const i = 0; i <= fi.files.length - 1; i++) {
+              
+                        const fsize = fi.files.item(i).size;
+                        const file = Math.round((fsize / 1024));
+                        // The size of the file.
+                        if (file >= 4096) {
+                            alert(
+                              "File too Big, please select a file less than 4mb");
+                            document.getElementById("tcPic").value=null;
+                        } 
+                    }
+                }
+            }
+            FilevalidationaadharPic = () => {
+                const fi = document.getElementById('aadharPic');
+                // Check if any file is selected.
+                if (fi.files.length > 0) {
+                    for (const i = 0; i <= fi.files.length - 1; i++) {
+              
+                        const fsize = fi.files.item(i).size;
+                        const file = Math.round((fsize / 1024));
+                        // The size of the file.
+                        if (file >= 4096) {
+                            alert(
+                              "File too Big, please select a file less than 4mb");
+                            document.getElementById("aadharPic").value=null;
+                        } 
+                    }
+                }
+            }
+            FilevalidationstudentPic = () => {
+                const fi = document.getElementById('studentPic');
+                // Check if any file is selected.
+                if (fi.files.length > 0) {
+                    for (const i = 0; i <= fi.files.length - 1; i++) {
+              
+                        const fsize = fi.files.item(i).size;
+                        const file = Math.round((fsize / 1024));
+                        // The size of the file.
+                        if (file >= 4096) {
+                            alert(
+                              "File too Big, please select a file less than 4mb");
+                            document.getElementById("studentPic").value=null;
+                        } 
+                    }
+                }
+            }
+            FilevalidationsamagraPic = () => {
+                const fi = document.getElementById('samagraPic');
+                // Check if any file is selected.
+                if (fi.files.length > 0) {
+                    for (const i = 0; i <= fi.files.length - 1; i++) {
+              
+                        const fsize = fi.files.item(i).size;
+                        const file = Math.round((fsize / 1024));
+                        // The size of the file.
+                        if (file >= 4096) {
+                            alert(
+                              "File too Big, please select a file less than 4mb");
+                            document.getElementById("samagraPic").value=null;
+                        } 
+                    }
+                }
+            }
+            FilevalidationcastPic = () => {
+                const fi = document.getElementById('castPic');
+                // Check if any file is selected.
+                if (fi.files.length > 0) {
+                    for (const i = 0; i <= fi.files.length - 1; i++) {
+              
+                        const fsize = fi.files.item(i).size;
+                        const file = Math.round((fsize / 1024));
+                        // The size of the file.
+                        if (file >= 4096) {
+                            alert(
+                              "File too Big, please select a file less than 4mb");
+                            document.getElementById("castPic").value=null;
+                        } 
+                    }
+                }
+            }
+            FilevalidationmigrationPic = () => {
+                const fi = document.getElementById('migrationPic');
+                // Check if any file is selected.
+                if (fi.files.length > 0) {
+                    for (const i = 0; i <= fi.files.length - 1; i++) {
+              
+                        const fsize = fi.files.item(i).size;
+                        const file = Math.round((fsize / 1024));
+                        // The size of the file.
+                        if (file >= 4096) {
+                            alert(
+                              "File too Big, please select a file less than 4mb");
+                            document.getElementById("migrationPic").value=null;
+                        } 
+                    }
+                }
+            }
+            FilevalidationBirthPic = () => {
+                const fi = document.getElementById('BirthPic');
+                // Check if any file is selected.
+                if (fi.files.length > 0) {
+                    for (const i = 0; i <= fi.files.length - 1; i++) {
+              
+                        const fsize = fi.files.item(i).size;
+                        const file = Math.round((fsize / 1024));
+                        // The size of the file.
+                        if (file >= 4096) {
+                            alert(
+                              "File too Big, please select a file less than 4mb");
+                            document.getElementById("BirthPic").value=null;
+                        } 
+                    }
+                }
+            }
+            FilevalidationfatherAadhar = () => {
+                const fi = document.getElementById('fatherAadhar');
+                // Check if any file is selected.
+                if (fi.files.length > 0) {
+                    for (const i = 0; i <= fi.files.length - 1; i++) {
+              
+                        const fsize = fi.files.item(i).size;
+                        const file = Math.round((fsize / 1024));
+                        // The size of the file.
+                        if (file >= 4096) {
+                            alert(
+                              "File too Big, please select a file less than 4mb");
+                            document.getElementById("fatherAadhar").value=null;
+                        } 
+                    }
+                }
+            }
+            FilevalidationmotherAadhar = () => {
+                const fi = document.getElementById('motherAadhar');
+                // Check if any file is selected.
+                if (fi.files.length > 0) {
+                    for (const i = 0; i <= fi.files.length - 1; i++) {
+              
+                        const fsize = fi.files.item(i).size;
+                        const file = Math.round((fsize / 1024));
+                        // The size of the file.
+                        if (file >= 4096) {
+                            alert(
+                              "File too Big, please select a file less than 4mb");
+                            document.getElementById("motherAadhar").value=null;
+                        } 
+                    }
+                }
+            }
           
             
             
@@ -459,7 +713,7 @@
 </head>
 <body>
 <jsp:include page="../../verMenu.jsp"></jsp:include>
-<form:form action="saveAdmissison" modelAttribute="admissionDto" method="post" enctype="multipart/form-data" onsubmit="return validateform()">
+<form:form action="saveAdmissison" modelAttribute="admissionDto" method="post" enctype="multipart/form-data" onsubmit="return validateform()"> --return !validateform()
     
 			<form:input type="hidden" path="id" />
     
@@ -531,6 +785,24 @@
         
                             </div>
                           </div>
+                           <div class="row">
+                          <div class="col-md-6 mb-4 pb-2">
+      
+                            <div class="form-outline">
+                              <label class="form-label" for="form3Examplev2">Father's Education</label>
+                                <form:input type="text" id="fEducation" path="fEducation" placeholder="Father's Education" class="form-control form-control-lg"/>
+                            </div>
+      
+                          </div>
+                          <div class="col-md-6 mb-4 pb-2">
+      
+                            <div class="form-outline">
+                         	     <label class="form-label" for="form3Examplev3">Mother Education</label>
+                              <form:input type="text" id="mEducation"  path="mEducation" placeholder="Mother Education" class="form-control form-control-lg"/>
+                            </div>
+      
+                          </div>
+                        </div>
       
                           <div class="row">
                             <div class="col-md-6 mb-4 pb-2">
@@ -668,24 +940,37 @@
  <div class="row">
                             <div class="col-md-6 mb-4 pb-2">
         
-                              <div class="form-outline">
+                             <div class="form-outline">
                                 <label class="form-label" for="form3Examplev2">Gender :</label>
                                 
 					<form:select path="gender">
 					<option value="Male">Male</option>
-					<option value="Female">FeMale</option>
+					<option value="Female">Female</option>
 					</form:select>                                       
                                </div>
-        
+                              
+                
                             </div>
- 
-                          
- 
-                         </div>
+                            <div class="col-md-6 mb-4 pb-2">
+        
+                              <div class="form-outline">
+                             <label class="form-label" for="form3Examplev2">Admission Type :</label>
+                          <select id="admissionType" name="admissionType" path="admissionType">
+  <option value="Regular"> Regular </option>
+  <option value="Private">Private</option>
+  <option value="Other">Other</option>
+  
+</select>
+           </div>
       
       
                       </div>
-                    </div>
+                      </div>
+                      </div>
+                      </div>
+                    
+                    
+                   
                     <div class="col-lg-6 bg-indigo text-white">
                       <div class="p-5">
                         <h3 class="fw-normal mb-5">Contact Details</h3>
@@ -722,8 +1007,8 @@
                             <div class="col-md-6 mb-4 pb-2">
         
                               <div class="form-outline">
-                                <label class="form-label" for="form3Examplev3">Samagra Id</label>
-                            <form:input type="text" class="form-control form-control-lg" id="samagraId" path="samagraId" placeholder="Samagra ID "/>
+                                <label class="form-label" for="form3Examplev3">Student Samagra Id</label>
+                            <form:input type="text" class="form-control form-control-lg" id="samagraId" path="samagraId" placeholder="Student Samagra ID "/>
                               </div>
         
                             </div>
@@ -807,14 +1092,14 @@
       
                             <div class="form-outline form-white">
                               <label > Aadhar Photo</label>
-                            <input type="file" id="aadharPic" name="aadharPic" />
+                            <input type="file" id="aadharPic" name="aadharPic" onChange="FilevalidationaadharPic()" />
                             </div>
       
                           </div>
                           <div class="col-md-7 mb-4 pb-2">
       
                             <div class="form-outline form-white">       
-                            <label for="form:inputEmail4">Student Photo</label> <input type="file" id="studentPic" name="studentPic" />
+                            <label for="form:inputEmail4">Student Photo</label> <input type="file" id="studentPic" name="studentPic" onChange="FilevalidationstudentPic()" />
                             </div>
       
                           </div>
@@ -825,14 +1110,14 @@
                           <div class="col-md-5 mb-4 pb-2">
       
                             <div class="form-outline form-white">
-                              <label > Samagra Photo</label> <input type="file" id="samagraPic" name="samagraPic" />
+                              <label > Samagra Photo</label> <input type="file" id="samagraPic" name="samagraPic" onChange="FilevalidationsamagraPic()"/>
                             </div>
       
                           </div>
                           <div class="col-md-7 mb-4 pb-2">
       
                             <div class="form-outline form-white">       
-                           <label for="form:inputEmail4">Cast Certificate</label> <input type="file" id ="castPic" name="castPic" />
+                           <label for="form:inputEmail4">Cast Certificate</label> <input type="file" id ="castPic" name="castPic" onChange="FilevalidationcastPic()" />
                             </div>
       
                           </div>
@@ -843,14 +1128,49 @@
                           <div class="col-md-5 mb-4 pb-2">
       
                             <div class="form-outline form-white">
-                             <label for="form:inputEmail4">TC Photo</label> <input type="file" id="tcPic" name="tcPic" />
+                             <label for="form:inputEmail4">TC Photo</label> <input type="file" id="tcPic" name="tcPic"  onChange="FilevalidationtcPic()"/>
                             </div>
       
                           </div>
                           <div class="col-md-7 mb-4 pb-2">
       
                             <div class="form-outline form-white">       
-                          <label >Migration Photo</label> <input type="file" id="migrationPic" name="migrationPic" />
+                          <label >Migration Photo</label> <input type="file" id="migrationPic" name="migrationPic" onChange="FilevalidationmigrationPic()" />
+                            </div>
+      
+                          </div>
+                        </div>
+                        
+                        
+                                                                     <div class="row">
+                          <div class="col-md-5 mb-4 pb-2">
+      
+                            <div class="form-outline form-white">
+                             <label for="form:inputEmail4">Father AadharCard</label> <input type="file" id="fatherAadhar" name="fatherAadhar"  onChange="FilevalidationfatherAadhar()"/>
+                            </div>
+      
+                          </div>
+                          <div class="col-md-7 mb-4 pb-2">
+      
+                            <div class="form-outline form-white">       
+                          <label >Mother AadharCard</label> <input type="file" id="motherAadhar" name="motherAadhar" onChange="FilevalidationmotherAadhar()" />
+                            </div>
+      
+                          </div>
+                        </div>
+                        
+                                                                     <div class="row">
+                          <div class="col-md-5 mb-4 pb-2">
+      
+                            <div class="form-outline form-white">
+                             <label for="form:inputEmail4">Birth Certification</label> <input type="file" id="BirthPic" name="BirthPic" onchange="FilevalidationBirthPic()"/>
+                            </div>
+      
+                          </div>
+                          <div class="col-md-7 mb-4 pb-2">
+      
+                            <div class="form-outline form-white">       
+                          
                             </div>
       
                           </div>

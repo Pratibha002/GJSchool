@@ -42,8 +42,32 @@ public class AdmissionDto {
 	public String castPhoto ;
 	public String tcPhoto;
 	public String migrationPhoto;
+	public String fEducation;
+	public String mEducation;
+	public String admissionType;
+	
+	
 
 	
+public String getAdmissionType() {
+		return admissionType;
+	}
+	public void setAdmissionType(String admissionType) {
+		this.admissionType = admissionType;
+	}
+public String getmEducation() {
+	
+		return mEducation;
+	}
+	public void setmEducation(String mEducation) {
+		this.mEducation = mEducation;
+	}
+public String getfEducation() {
+		return fEducation;
+	}
+	public void setfEducation(String fEducation) {
+		this.fEducation = fEducation;
+	}
 public String getStudentPhoto() {
 	return studentPhoto;
 }
