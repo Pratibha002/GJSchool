@@ -92,7 +92,30 @@
                 var dob = document.getElementById("dob");
                 var admissionDate = document.getElementById("admissionDate");
                
-                
+                // onChange event validation for below field
+                // Name | Father | Mother | Occupation | Bank Name | Place of birth | Religion | | BankName
+
+                function fieldValidation(){
+
+                let value = document.getElementById("validation").value.trim();
+                let errResult=document.getElementById('error');
+                validCriteria = /^[a-zA-Z]+(?:[-' ][a-zA-Z]+)*$/
+
+                if(value=="" || value.length<=0){
+                    document.getElementById("validation").style="background-color: #FBE3E4; border-color: Red";
+                    return false;
+                   }else if(!validCriteria.test(value) || !(value.length<20)){
+                    document.getElementById("validation").style="background-color: #FBE3E4; border-color: Red";
+                    return false;
+                   }else{
+                   	document.getElementById("validation").style=" border-color: green";
+                     return true;
+                   }
+
+                }
+
+
+
                 if(name.value.length<=0 || !isNaN(name.value) || name.value.length>20 ) {   
                 	document.getElementById("name").style="background-color: #FBE3E4; border-color: Red";
                         valid = false;
