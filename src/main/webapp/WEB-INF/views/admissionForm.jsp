@@ -822,7 +822,9 @@
 
           function fieldValidation(){
 
-          let validCriteria = /^[a-zA-Z]+(?:[-' ][a-zA-Z]+)*$/
+         // let validCriteria = /^[a-zA-Z]+(?:[-' ][a-zA-Z]+)*$/
+          let validCriteria = /^[a-zA-Z ]*$/;
+
 
 // validation for name field
           let name = document.getElementById("name").value.trim();
