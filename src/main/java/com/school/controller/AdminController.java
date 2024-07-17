@@ -124,5 +124,14 @@ public class AdminController {
 		return "redirect:/category";
 	}
 	
+	@RequestMapping("/updateFeesType")
+	public String updateFeesType() {
+		//adminDao.deleteFeesType();
+//		return "redirect:/feestype";
+		return "updateClasses";
+		
+	}
+	
+	
 	
 }

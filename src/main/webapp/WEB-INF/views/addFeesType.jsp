@@ -35,6 +35,7 @@
 				<tr>
 				<td>${feestype} </td>
 				<td><a href="deletefeestype?feestype=${feestype}">Delete</a></td>
+				<td><a href="updatefeestype?feestype=${feestype}">/Update</a></td>
 				</tr>
 			</j:forEach>
 			

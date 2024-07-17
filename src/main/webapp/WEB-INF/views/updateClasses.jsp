@@ -13,7 +13,7 @@
       <script src = "https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
 
-<title>Add Classes</title>
+<title>Update Classes</title>
 
 <script> 
 
@@ -56,7 +56,7 @@ function validateform()
 <body>
 <jsp:include page="../../verMenu.jsp"></jsp:include>
 <center> 
-<h2> Add Classes here</h2>
+<h2> Update Fees here</h2>
  
 <form:form action="addClasses" method="get" modelAttribute="classes" onsubmit="return validateform()">
 
@@ -65,7 +65,7 @@ function validateform()
 			<label>Fees : </label> <input type="text" name="feesAmount" id="feesAmount" placeholder="Enter Fees Amount For Class" />
 			<Br>
 
-			<input type="submit" value="Add Class">
+			<input type="submit" value="Update Fees">
 			 
 		</form:form>
 		
@@ -78,7 +78,7 @@ function validateform()
 				<td>Classes</td>
 				<Td> Fees</Td>
 				<Td>Action </Td>
-				<td>Update</td>
+				
 			</tr>
 			
 			<j:forEach var="classes" items="${classes}">
@@ -86,7 +86,7 @@ function validateform()
 					<td>${classes.classes}</td>
 					<td>${classes.fees}</td>
 					<td><a href="deleteclasses?classes=${classes.classes}">Delete</a></td>
-					<td><a href="updateFeesType">Update</a></td>
+				<!-- <td><a href="updatefeestype?classes=${classes.fees}">Update</a></td> -->	
 				</tr>
 			</j:forEach>
 			
