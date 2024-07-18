@@ -13,12 +13,12 @@
 <center> 
 <h2> Add Fees Type</h2>
  
-<form:form action="addfeestype" method="get" modelAttribute="feestype">
+<form:form action="updatefeestype" method="get" modelAttribute="feestype">
 
 			<label>Fees Type : </label> <input type="text" name="feestype" placeholder="Type of Fees" />
 			<Br>
 
-			<input type="submit" value="Add feestype">
+			<input type="submit" value="Update feestype">
 			 
 		</form:form>
 		
@@ -35,7 +35,7 @@
 				<tr>
 				<td>${feestype} </td>
 				<td><a href="deletefeestype?feestype=${feestype}">Delete</a></td>
-				<!-- <td><a href="updatefeestype?feestype=${feestype}">/Update</a></td> -->
+				 <td><a href="updatefeestype?feestype=${feestype}">/Update</a></td>
 				</tr>
 			</j:forEach>
 			

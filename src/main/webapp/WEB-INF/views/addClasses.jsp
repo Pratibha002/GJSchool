@@ -86,7 +86,7 @@ function validateform()
 					<td>${classes.classes}</td>
 					<td>${classes.fees}</td>
 					<td><a href="deleteclasses?classes=${classes.classes}">Delete</a></td>
-					<td><a href="updateFeesType">Update</a></td>
+					<td><a href="updateFeesType?classes=${classes.fees}">Update</a></td>
 				</tr>
 			</j:forEach>
 			

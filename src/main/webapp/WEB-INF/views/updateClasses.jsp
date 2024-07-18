@@ -58,16 +58,16 @@ function validateform()
 <center> 
 <h2> Update Fees here</h2>
  
-<form:form action="addClasses" method="get" modelAttribute="classes" onsubmit="return validateform()">
-
-			<label>Class : </label> <input type="text" name="className" id="className" placeholder="Enter Class in Roman Number" />
-			<Br>
-			<label>Fees : </label> <input type="text" name="feesAmount" id="feesAmount" placeholder="Enter Fees Amount For Class" />
-			<Br>
-
-			<input type="submit" value="Update Fees">
-			 
-		</form:form>
+		
+	<form:form action="updatefeestype" method="get" modelAttribute="classes" onsubmit="return validateform()">
+    <label>Class : </label>
+    <input type="text" name="className" id="className" placeholder="Enter Class in Roman Number"  />
+    <br>
+    <label>Fees : </label>
+    <input type="text" name="feesAmount" id="feesAmount" placeholder="Enter Fees Amount For Class" />
+    <br>
+    <input type="submit" value="Update Fees">
+</form:form>
 		
 		<br> <br>
 		
@@ -78,6 +78,7 @@ function validateform()
 				<td>Classes</td>
 				<Td> Fees</Td>
 				<Td>Action </Td>
+				<Td>Update </Td>
 				
 			</tr>
 			
@@ -86,7 +87,9 @@ function validateform()
 					<td>${classes.classes}</td>
 					<td>${classes.fees}</td>
 					<td><a href="deleteclasses?classes=${classes.classes}">Delete</a></td>
-				<!-- <td><a href="updatefeestype?classes=${classes.fees}">Update</a></td> -->	
+				<!-- <td><a href="updatefeestype?classes=${classes.fees}">Update</a></td> -->
+				<td><a href="updateFeesType?className=${classes.classes}&feesAmount=${classes.fees}">Update</a></td>
+					
 				</tr>
 			</j:forEach>
 			
