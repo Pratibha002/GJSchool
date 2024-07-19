@@ -49,7 +49,7 @@ public class AdminController {
 	
 	@RequestMapping("/updatefeestype")
 	public String update(@RequestParam("className") String className,
-	                     @RequestParam("feesAmount") int feesAmount) {
+	                     @RequestParam("feesAmount") int feesAmount, Model model) {
 
 	    List<FeesClassesDto> classesList = adminDao.listClasses();
 	    boolean classFound = false;
@@ -58,15 +58,22 @@ public class AdminController {
 	        if (c.getClasses().equals(className)) {
 	            classFound = true;
 	            adminDao.updateClassesAndFees(className, feesAmount);
+	            model.addAttribute("msg", "Fees Updated Successfully");
+	            
 	            break; 
 	        }
 	    }
 
-//	    if (!classFound) {
-//	        
-//	    }
-
-	    return "redirect:/updateFeesType"; 
+	    if (!classFound) {
+	    	 model.addAttribute("msg2", "Enter Valid Class");
+	    }
+// 
+	    List<FeesClassesDto> classes = adminDao.listClasses();
+	    model.addAttribute("classes", classes);
+//	    return "redirect:/updateFeesType"; 
+//	    return "updateFeesType"; 
+	    return "addClasses"; 
+	    
 	}
 
 //======================================================================================	

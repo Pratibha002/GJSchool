@@ -70,6 +70,8 @@ function validateform()
 		</form:form>
 		
 		<br> <br>
+		 <h2 align="center"><font color = "green"> ${msg } </font>  </h2>
+		 <h2 align="center"><font color = "red"> ${msg2 } </font>  </h2>
 		
 		
 				<table class = "table table-hover table-bordered ">

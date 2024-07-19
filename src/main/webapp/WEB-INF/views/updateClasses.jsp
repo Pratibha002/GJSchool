@@ -59,7 +59,7 @@ function validateform()
 <h2> Update Fees here</h2>
  
 		
-	<form:form action="updatefeestype" method="get" modelAttribute="classes" onsubmit="return validateform()">
+	<form:form action="updatefeestype" method="post" modelAttribute="classes" onsubmit="return validateform()">
     <label>Class : </label>
     <input type="text" name="className" id="className" placeholder="Enter Class in Roman Number"  />
     <br>
