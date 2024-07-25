@@ -93,14 +93,22 @@
                 var dob = document.getElementById("dob");
                 var admissionDate = document.getElementById("admissionDate");
                
-
-
-                if(name.value.length<=0 || !isNaN(name.value) || name.value.length>20 ) {
+				
+				function isValidName(name) {
+            // Simple validation: allow only alphabetic characters and spaces
+         	   return /^[a-zA-Z ]+$/.test(name);
+        		}
+                
+				
+				if(name.value.length<=0 || !isValidName(name.value) || name.value.length>20 ) {
                 	document.getElementById("name").style="background-color: #FBE3E4; border-color: Red";
                         valid = false;
                     }else{
                     	document.getElementById("name").style="background-color: white; border-color: black";
                     }
+				
+				 
+
 
                 if(scholarNumber.value.length<=0 || isNaN(scholarNumber.value) || scholarNumber.value.length>20) {
                 	document.getElementById("scholarNumber").style="background-color: #FBE3E4; border-color: Red";
@@ -110,14 +118,14 @@
                 }
 
 
-                if(fName.value.length<=0 || fName.value.length>20 || !isNaN(fName.value) ) {
+                if(fName.value.length<=0 || fName.value.length>20 || !isValidName(fName.value) ) {
                 	document.getElementById("fName").style="background-color: #FBE3E4; border-color: Red";
                 valid = false;
             	}else{
             		document.getElementById("fName").style="background-color: white; border-color: Black";
             	}
 
-                if(mName.value.length<=0 || mName.value.length>20 || !isNaN(mName.value) ) {
+                if(mName.value.length<=0 || mName.value.length>20 || !isValidName(mName.value) ) {
                 	document.getElementById("mName").style="background-color: #FBE3E4; border-color: Red";
                 valid = false;
             	}else{
@@ -125,26 +133,26 @@
             	}
 
 
-                if(fOccupation.value.length<=0 || fOccupation.value.length>20 || !isNaN(fOccupation.value) ) {
+                if(fOccupation.value.length<=0 || fOccupation.value.length>20 || !isValidName(fOccupation.value) ) {
                 	document.getElementById("fOccupation").style="background-color: #FBE3E4; border-color: Red";
                 valid = false;
             	}else{
             		document.getElementById("fOccupation").style="background-color: white; border-color: Black";
             	}
 
-                if(mOccupation.value.length<=0 || mOccupation.value.length>20 || !isNaN(mOccupation.value) ) {
+                if(mOccupation.value.length<=0 || mOccupation.value.length>20 || !isValidName(mOccupation.value) ) {
                 	document.getElementById("mOccupation").style="background-color: #FBE3E4; border-color: Red";
                 valid = false;
             	}else{
             		document.getElementById("mOccupation").style="background-color: white; border-color: Black";
             	}
-                if(fEducation.value.length<=0 || fEducation.value.length>20 || !isNaN(fEducation.value) ) {
+                if(fEducation.value.length<=0 || fEducation.value.length>20 || !isValidName(fEducation.value) ) {
                 	document.getElementById("fEducation").style="background-color: #FBE3E4; border-color: Red";
                 valid = false;
             	}else{
             		document.getElementById("fEducation").style="background-color: white; border-color: Black";
             	}
-                if(mEducation.value.length<=0 || mEducation.value.length>20 || !isNaN(mEducation.value) ) {
+                if(mEducation.value.length<=0 || mEducation.value.length>20 || !isValidName(mEducation.value) ) {
                 	document.getElementById("mEducation").style="background-color: #FBE3E4; border-color: Red";
                 valid = false;
             	}else{
@@ -160,14 +168,14 @@
             		document.getElementById("dob").style="background-color: white; border-color: Black";
             	}
 
-                if(birthPlace.value.length<=0 || birthPlace.value.length>30 || !isNaN(birthPlace.value) ) {
+                if(birthPlace.value.length<=0 || birthPlace.value.length>30 || !isValidName(birthPlace.value) ) {
                 	document.getElementById("birthPlace").style="background-color: #FBE3E4; border-color: Red";
                 valid = false;
             	}else{
             		document.getElementById("birthPlace").style="background-color: white; border-color: Black";
             	}
 
-                if(religion.value.length<=0 || religion.value.length>20 || !isNaN(religion.value) ) {
+                if(religion.value.length<=0 || religion.value.length>20 || !isValidName(religion.value) ) {
                 	document.getElementById("religion").style="background-color: #FBE3E4; border-color: Red";
                 valid = false;
             	}else{
@@ -182,7 +190,7 @@
             	}
 
 
-                if(lastSchoolStudied.value.length<=0 || lastSchoolStudied.value.length>20 || !isNaN(lastSchoolStudied.value) ) {
+                if(lastSchoolStudied.value.length<=0 || lastSchoolStudied.value.length>20 || !isValidName(lastSchoolStudied.value) ) {
                 	document.getElementById("lastSchoolStudied").style="background-color: #FBE3E4; border-color: Red";
                 valid = false;
             	}else{
@@ -219,7 +227,7 @@
 
 
 
-                if(bankName.value.length<=0 || bankName.value.length>40 || !isNaN(bankName.value) ) {
+                if(bankName.value.length<=0 || bankName.value.length>40 || !isValidName(bankName.value) ) {
                 	document.getElementById("bankName").style="background-color: #FBE3E4; border-color: Red";
                 valid = false;
             	}else{
@@ -261,14 +269,14 @@
 
 
 
-                if(city.value.length<=0 || city.value.length>30 || !isNaN(city.value) ) {
+                if(city.value.length<=0 || city.value.length>30 || !isValidName(city.value) ) {
                 	document.getElementById("city").style="background-color: #FBE3E4; border-color: Red";
                 valid = false;
             	}else{
             		document.getElementById("city").style="background-color: white; border-color: Black";
             	}
 
-                if(state.value.length<=0 || state.value.length>40 || !isNaN(state.value) ) {
+                if(state.value.length<=0 || state.value.length>40 || !isValidName(state.value) ) {
                 	document.getElementById("state").style="background-color: #FBE3E4; border-color: Red";
                 valid = false;
             	}else{
