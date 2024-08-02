@@ -31,10 +31,14 @@
 <br> 
 <a href="feesReport">Fees Report</a>
 <br> 
-
-
-
-
+<a href="http://localhost:8081/test">test</a>
+<br> 
+<a href="http://localhost:8081/test2">test2</a>
+<br> 
+<a href="http://localhost:8081/test3">test3</a>
+<br> 
+<a href="http://localhost:8081/test4">test4</a>
+<br> 
 
 </body>
 </html>
